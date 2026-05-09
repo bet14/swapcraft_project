@@ -5,596 +5,1414 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SwapCraft Project Presentation</title>
   <style>
-    * { box-sizing: border-box; }
+    :root {
+      --bg: #f7f4ef;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --primary: #7c3aed;
+      --primary-dark: #5b21b6;
+      --accent: #f97316;
+      --green: #10b981;
+      --blue: #2563eb;
+      --rose: #f43f5e;
+      --card: #ffffff;
+      --line: #e5e7eb;
+      --soft-purple: #ede9fe;
+      --soft-orange: #ffedd5;
+      --soft-green: #d1fae5;
+      --soft-blue: #dbeafe;
+      --soft-rose: #ffe4e6;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f4f6f8;
-      color: #1f2937;
+      background: #e5e7eb;
+      color: var(--ink);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
-    .slides {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 24px;
+
+    .deck {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 28px;
+      padding: 28px;
     }
+
     .slide {
-      background: white;
-      margin: 0 auto 28px auto;
-      padding: 32px;
-      border-radius: 12px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      min-height: 600px;
+      width: 1280px;
+      min-height: 720px;
+      background:
+        radial-gradient(circle at top right, rgba(124, 58, 237, 0.18), transparent 32%),
+        radial-gradient(circle at bottom left, rgba(249, 115, 22, 0.14), transparent 30%),
+        var(--bg);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(17, 24, 39, 0.22);
+      position: relative;
+      padding: 54px 64px;
       page-break-after: always;
     }
-    .cover {
-      background: linear-gradient(135deg, #1b4332, #2d6a4f);
-      color: white;
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 10px;
+      background: linear-gradient(90deg, var(--primary), var(--accent), var(--green));
     }
-    .slide-number {
+
+    .slide-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(124, 58, 237, 0.1);
+      color: var(--primary-dark);
       font-size: 14px;
-      color: #6b7280;
-      margin-bottom: 8px;
-      font-weight: bold;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
-    .cover .slide-number {
-      color: #d1fae5;
-    }
+
     h1 {
-      margin: 8px 0 12px 0;
-      font-size: 42px;
+      font-size: 46px;
+      line-height: 1.04;
+      margin: 14px 0 0;
+      letter-spacing: -0.045em;
+      max-width: 850px;
     }
+
     h2 {
-      margin: 0 0 8px 0;
-      font-size: 30px;
-      color: #2d6a4f;
+      font-size: 24px;
+      margin: 0 0 14px;
+      letter-spacing: -0.02em;
     }
-    .cover h2 {
-      color: white;
-    }
+
     h3 {
-      margin: 18px 0 8px 0;
-      font-size: 20px;
-      color: #1f2937;
+      font-size: 18px;
+      margin: 0 0 10px;
     }
-    p, li {
-      font-size: 17px;
-      line-height: 1.6;
+
+    p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 16px;
     }
+
     ul {
-      margin: 8px 0 16px 20px;
+      margin: 0;
+      padding-left: 20px;
     }
-    .subtitle {
-      color: #6b7280;
-      margin-bottom: 20px;
+
+    li {
+      margin: 7px 0;
+      line-height: 1.42;
+      color: #374151;
+      font-size: 16px;
     }
-    .cover .subtitle {
-      color: #e5e7eb;
+
+    .slide-no {
+      min-width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      background: #111827;
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 18px;
+      font-weight: 900;
+      box-shadow: 0 10px 25px rgba(17, 24, 39, 0.2);
     }
+
     .grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 24px;
+      gap: 22px;
     }
+
     .grid-3 {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
     }
-    .box {
-      background: #f9fafb;
-      border-left: 5px solid #2d6a4f;
-      padding: 16px;
-      border-radius: 8px;
-      margin-bottom: 16px;
+
+    .card {
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(229, 231, 235, 0.85);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 12px 32px rgba(31, 41, 55, 0.08);
     }
-    .box.orange {
-      border-left-color: #f4a261;
+
+    .card.compact {
+      padding: 17px;
     }
-    .box.red {
-      border-left-color: #e76f51;
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      font-size: 24px;
+      margin-bottom: 14px;
     }
-    .box.green {
-      border-left-color: #2d6a4f;
+
+    .purple { background: var(--soft-purple); color: var(--primary-dark); }
+    .orange { background: var(--soft-orange); color: #c2410c; }
+    .green { background: var(--soft-green); color: #047857; }
+    .blue { background: var(--soft-blue); color: #1d4ed8; }
+    .rose { background: var(--soft-rose); color: #be123c; }
+
+    .metric-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-top: 18px;
     }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 12px;
-      font-size: 15px;
-    }
-    th, td {
-      border: 1px solid #d1d5db;
-      padding: 10px;
-      text-align: left;
-      vertical-align: top;
-    }
-    th {
-      background: #2d6a4f;
+
+    .metric {
+      padding: 18px;
+      border-radius: 20px;
+      background: #111827;
       color: white;
     }
-    .badge {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 999px;
+
+    .metric .value {
+      font-size: 30px;
+      font-weight: 950;
+      letter-spacing: -0.04em;
+    }
+
+    .metric .label {
       font-size: 13px;
-      font-weight: bold;
-      background: #dcfce7;
-      color: #166534;
+      color: #d1d5db;
+      margin-top: 6px;
+      line-height: 1.3;
     }
-    .small {
+
+    .table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: white;
+      font-size: 15px;
+    }
+
+    .table th {
+      background: #111827;
+      color: white;
+      text-align: left;
+      padding: 13px 14px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .table td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #edf0f3;
+      vertical-align: top;
+    }
+
+    .table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      background: var(--soft-purple);
+      color: var(--primary-dark);
+      white-space: nowrap;
+    }
+
+    .tag.green {
+      background: var(--soft-green);
+      color: #047857;
+    }
+
+    .tag.orange {
+      background: var(--soft-orange);
+      color: #c2410c;
+    }
+
+    .tag.rose {
+      background: var(--soft-rose);
+      color: #be123c;
+    }
+
+    .big-quote {
+      border-left: 6px solid var(--primary);
+      padding: 16px 18px;
+      background: rgba(255, 255, 255, 0.72);
+      border-radius: 0 18px 18px 0;
+      color: #374151;
+      font-size: 20px;
+      line-height: 1.42;
+      font-weight: 650;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(9, 1fr);
+      gap: 9px;
+      margin-top: 18px;
+    }
+
+    .milestone {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      padding: 13px 10px;
+      min-height: 132px;
+      position: relative;
+    }
+
+    .milestone::before {
+      content: "";
+      position: absolute;
+      top: -7px;
+      left: 18px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 5px rgba(249, 115, 22, 0.14);
+    }
+
+    .milestone .date {
+      color: var(--primary-dark);
+      font-weight: 900;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .milestone .name {
+      font-weight: 850;
       font-size: 14px;
-      color: #6b7280;
+      line-height: 1.25;
     }
-    .flow {
+
+    .milestone .deliver {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.32;
+      margin-top: 8px;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: 190px 1fr 92px;
+      align-items: center;
+      gap: 12px;
+      margin: 13px 0;
+    }
+
+    .bar-label {
+      font-weight: 750;
+      font-size: 14px;
+    }
+
+    .bar-track {
+      height: 18px;
+      border-radius: 999px;
+      background: #edeef1;
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+    }
+
+    .bar-value {
+      text-align: right;
+      color: #111827;
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .donut-wrap {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .donut {
+      width: 186px;
+      height: 186px;
+      border-radius: 50%;
+      background: conic-gradient(
+        var(--primary) 0 52.2%,
+        var(--accent) 52.2% 94.7%,
+        var(--green) 94.7% 100%
+      );
+      position: relative;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.45);
+    }
+
+    .donut::after {
+      content: "$329.2K";
+      position: absolute;
+      inset: 32px;
+      border-radius: 50%;
+      background: white;
+      display: grid;
+      place-items: center;
+      font-size: 25px;
+      font-weight: 950;
+      letter-spacing: -0.04em;
+      color: #111827;
+    }
+
+    .legend {
+      display: grid;
+      gap: 10px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: #374151;
+    }
+
+    .swatch {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+    }
+
+    .pill-list {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      align-items: center;
-      margin-top: 16px;
     }
-    .flow-step {
-      background: #ecfdf5;
-      border: 1px solid #a7f3d0;
-      padding: 12px 14px;
-      border-radius: 8px;
-      font-weight: bold;
+
+    .pill {
+      padding: 10px 13px;
+      border-radius: 999px;
+      background: white;
+      border: 1px solid var(--line);
+      font-size: 14px;
+      font-weight: 750;
     }
-    .arrow {
+
+    .scope-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 22px;
+    }
+
+    .check-list li::marker {
+      color: var(--green);
+    }
+
+    .x-list li::marker {
+      color: var(--rose);
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .role-item {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 13px;
+      align-items: start;
+      padding: 13px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 17px;
+    }
+
+    .role-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: var(--soft-purple);
       font-size: 22px;
-      color: #2d6a4f;
     }
-    @media (max-width: 900px) {
-      .grid-2, .grid-3 {
-        grid-template-columns: 1fr;
+
+    .role-title {
+      font-weight: 900;
+      margin-bottom: 3px;
+    }
+
+    .role-desc {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.38;
+    }
+
+    .risk-card {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 16px;
+      background: white;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+    }
+
+    .risk-title {
+      font-weight: 900;
+      margin-bottom: 5px;
+    }
+
+    .risk-text {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.38;
+    }
+
+    .footer {
+      position: absolute;
+      left: 64px;
+      right: 64px;
+      bottom: 26px;
+      display: flex;
+      justify-content: space-between;
+      color: #9ca3af;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    @media print {
+      body {
+        background: white;
       }
+
+      .deck {
+        padding: 0;
+        gap: 0;
+      }
+
       .slide {
-        min-height: auto;
-        padding: 22px;
+        width: 100vw;
+        min-height: 100vh;
+        border-radius: 0;
+        box-shadow: none;
       }
-      h1 { font-size: 34px; }
-      h2 { font-size: 26px; }
     }
   </style>
 </head>
+
 <body>
-  <div class="slides">
+  <main class="deck">
 
-    <section class="slide cover">
-      <div class="slide-number">Slide 1</div>
-      <h1>SwapCraft</h1>
-      <h2>Handmade Craft Exchange Platform</h2>
-      <p class="subtitle">Project Introduction Presentation</p>
-
-      <div class="box orange" style="background: rgba(255,255,255,0.1); color: white; border-left-color: #f4a261;">
-        <p><strong>Project ID:</strong> SC-2026-001</p>
-        <p><strong>Version:</strong> 1.1</p>
-        <p><strong>Timeline:</strong> Sep 1, 2026 → Jun 1, 2027</p>
-        <p><strong>Total Budget:</strong> $329,200</p>
-        <p><strong>Prepared by:</strong> Project Management Team / EPITA PM Group</p>
+    <!-- Slide 1 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">01 · Problem & Market Opportunity</div>
+          <h1>SwapCraft: a community-first marketplace for handmade craft exchange</h1>
+        </div>
+        <div class="slide-no">01</div>
       </div>
-    </section>
-
-    <section class="slide">
-      <div class="slide-number">Slide 2</div>
-      <h2>Presentation Content</h2>
-      <p class="subtitle">Topics covered in the following slides</p>
-      <ol>
-        <li>Project background and market opportunity</li>
-        <li>Project purpose and strategic value</li>
-        <li>Objectives and success indicators</li>
-        <li>Solution options and recommendation</li>
-        <li>Project scope</li>
-        <li>Key deliverables</li>
-        <li>How the platform works</li>
-        <li>Timeline and milestones</li>
-        <li>Budget overview</li>
-        <li>Revenue model and benefits</li>
-        <li>Team roles and stakeholders</li>
-        <li>Risks, assumptions, and constraints</li>
-        <li>Summary and recommendation</li>
-      </ol>
-    </section>
-
-    <section class="slide">
-      <div class="slide-number">Slide 3</div>
-      <h2>Project Background &amp; Market Opportunity</h2>
-      <p class="subtitle">Why SwapCraft is needed</p>
 
       <div class="grid-2">
-        <div>
-          <div class="box red">
-            <h3>Current Problems</h3>
-            <ul>
-              <li>Independent artisans lack a dedicated digital platform built for handmade trading and exchange.</li>
-              <li>Existing platforms like Etsy and eBay focus mainly on monetary sales, not swapping.</li>
-              <li>High fees reduce artisan profitability.</li>
-              <li>Generic marketplaces do not highlight creator identity and story well.</li>
-              <li>There is little support for collaboration, commissions, and peer exchange.</li>
-            </ul>
-          </div>
+        <div class="card">
+          <div class="icon purple">🧶</div>
+          <h2>The Problem</h2>
+          <ul>
+            <li><strong>Fragmented marketplaces:</strong> existing platforms are crowded, generic, or expensive for small artisans.</li>
+            <li><strong>No dedicated barter mechanism:</strong> crafters need to exchange materials and finished products, not only sell for cash.</li>
+            <li><strong>Weak creator identity:</strong> generic e-commerce does not highlight the story, craft process, and maker portfolio.</li>
+            <li><strong>Creator isolation:</strong> artisans lack a collaborative community for ideas, commissions, and co-creation.</li>
+          </ul>
         </div>
-        <div>
-          <div class="box green">
-            <h3>Opportunity</h3>
-            <ul>
-              <li>Global handmade craft market estimated at <strong>$739.95B in 2024</strong>.</li>
-              <li>Projected to exceed <strong>$983B by 2030</strong>.</li>
-              <li>Online craft marketplace segment is growing strongly.</li>
-              <li>SwapCraft can differentiate through exchange mechanics, lower fees, and community-first design.</li>
-              <li>Supports the creator economy and circular economy trends.</li>
-            </ul>
+
+        <div class="card">
+          <div class="icon orange">📈</div>
+          <h2>Market Opportunity</h2>
+          <ul>
+            <li>The global handmade crafts market was estimated at <strong>$739.95B in 2024</strong>.</li>
+            <li>Projected to exceed <strong>$983.12B by 2030</strong>, with <strong>4.9% CAGR</strong>.</li>
+            <li>The online craft marketplace segment is growing at approximately <strong>12% annually</strong>.</li>
+            <li>Delay creates a risk that competitors capture the niche before SwapCraft launches.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:22px;">
+        <h2>SwapCraft Differentiation</h2>
+        <div class="grid-4">
+          <div>
+            <span class="tag">Unique</span>
+            <h3 style="margin-top:10px;">Exchange / Swap</h3>
+            <p>Integrated peer-to-peer product and material trading aligned with circular economy behavior.</p>
+          </div>
+          <div>
+            <span class="tag orange">Lower Fees</span>
+            <h3 style="margin-top:10px;">Seller Friendly</h3>
+            <p>Target commission of 5–8%, at least 30% lower than major competitors.</p>
+          </div>
+          <div>
+            <span class="tag green">Community</span>
+            <h3 style="margin-top:10px;">Maker Network</h3>
+            <p>Forums, direct messaging, creator profiles, collaboration, and custom orders.</p>
+          </div>
+          <div>
+            <span class="tag rose">Trust</span>
+            <h3 style="margin-top:10px;">Handmade Integrity</h3>
+            <p>Verification, ratings, moderation, and dispute processes to protect marketplace quality.</p>
           </div>
         </div>
       </div>
+
+      <div class="footer">
+        <span>SwapCraft Project · SC-2026-001</span>
+        <span>Purpose: empower artisans, enable sustainable exchange, build community</span>
+      </div>
     </section>
 
+    <!-- Slide 2 -->
     <section class="slide">
-      <div class="slide-number">Slide 4</div>
-      <h2>Project Purpose &amp; Strategic Value</h2>
-      <p class="subtitle">Why this project matters</p>
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">02 · Objectives & Success Indicators</div>
+          <h1>Clear launch, growth, trading, financial, and reliability targets</h1>
+        </div>
+        <div class="slide-no">02</div>
+      </div>
 
-      <div class="box green">
-        <ul>
-          <li>Empower small-scale artisans with fair, low-cost market access.</li>
-          <li>Foster a sustainable circular economy through swapping of products and raw materials.</li>
-          <li>Build an engaged community of makers and buyers.</li>
-          <li>Create a platform that combines e-commerce, exchange, and collaboration in one place.</li>
-          <li>Offer stronger differentiation than traditional handmade marketplaces.</li>
-        </ul>
+      <div class="metric-row">
+        <div class="metric">
+          <div class="value">Jun 1, 2027</div>
+          <div class="label">Target go-live date for fully functional platform</div>
+        </div>
+        <div class="metric">
+          <div class="value">10,000</div>
+          <div class="label">Sales + swap transactions within 12 months post-launch</div>
+        </div>
+        <div class="metric">
+          <div class="value">99.5%</div>
+          <div class="label">Target uptime from launch onward</div>
+        </div>
+        <div class="metric">
+          <div class="value">$220K–$420K</div>
+          <div class="label">Projected Year 1 revenue range</div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:24px;">
+        <div class="card">
+          <h2>Primary Objectives</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Objective</th>
+                <th>Target</th>
+                <th>Timeline</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Launch platform</td>
+                <td><strong>Go-live ready</strong></td>
+                <td>Q2 2027</td>
+              </tr>
+              <tr>
+                <td>Active artisan profiles</td>
+                <td><strong>5,000</strong></td>
+                <td>6 months post-launch</td>
+              </tr>
+              <tr>
+                <td>Registered buyers</td>
+                <td><strong>20,000</strong></td>
+                <td>12 months post-launch</td>
+              </tr>
+              <tr>
+                <td>User satisfaction</td>
+                <td><strong>≥ 4.2 / 5.0</strong></td>
+                <td>6 months post-launch</td>
+              </tr>
+              <tr>
+                <td>Break-even</td>
+                <td><strong>Operational break-even</strong></td>
+                <td>End of Year 2</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h2>Success Indicator Groups</h2>
+          <div class="grid-2">
+            <div class="card compact">
+              <h3>👥 Product Usage</h3>
+              <p>DAU, WAU, MAU, DAU/MAU stickiness, new users, activation, retention.</p>
+            </div>
+            <div class="card compact">
+              <h3>🔁 Trading / Swap</h3>
+              <p>Total swap volume, number of swaps, unique traders, success rate, failed transaction rate.</p>
+            </div>
+            <div class="card compact">
+              <h3>🚀 Growth</h3>
+              <p>New user growth, referral rate, organic vs. paid acquisition, viral coefficient.</p>
+            </div>
+            <div class="card compact">
+              <h3>💰 Financial</h3>
+              <p>Revenue, take rate, gross margin, CAC, LTV, LTV/CAC ≥ 3:1.</p>
+            </div>
+            <div class="card compact">
+              <h3>⭐ User Experience</h3>
+              <p>Funnel conversion, drop-off, time to first swap, support tickets, NPS/CSAT.</p>
+            </div>
+            <div class="card compact">
+              <h3>🔒 Reliability / Security</h3>
+              <p>Uptime, API latency &lt; 200ms, error rate, incidents, fraud/abuse rate.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>KPIs aligned with Business Case and Project Charter</span>
+        <span>Launch target: Q2 2027</span>
+      </div>
+    </section>
+
+    <!-- Slide 3 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">03 · Project Scope</div>
+          <h1>A focused web platform for selling, buying, swapping, and community collaboration</h1>
+        </div>
+        <div class="slide-no">03</div>
+      </div>
+
+      <div class="scope-grid">
+        <div class="card">
+          <div class="icon green">✅</div>
+          <h2>In Scope</h2>
+          <div class="grid-2">
+            <ul class="check-list">
+              <li>Web-based marketplace for listing, buying, and selling handmade crafts.</li>
+              <li>Exchange / swap system for finished products and raw materials.</li>
+              <li>Creator profiles with portfolio, bio, and story sections.</li>
+              <li>Secure payment gateway: credit card, PayPal, digital wallets.</li>
+              <li>Order management and real-time order tracking.</li>
+              <li>Review and rating system for buyers and sellers.</li>
+            </ul>
+            <ul class="check-list">
+              <li>Community forums and direct messaging for collaboration.</li>
+              <li>Custom order and commission request system.</li>
+              <li>Admin dashboard for management and moderation.</li>
+              <li>Search, filter, and category browsing.</li>
+              <li>Email notifications and alerts.</li>
+              <li>Seller analytics and customer support ticketing.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="icon rose">🚫</div>
+          <h2>Out of Scope for Phase 1</h2>
+          <ul class="x-list">
+            <li>Native mobile applications for iOS and Android.</li>
+            <li>Physical shipping or logistics management.</li>
+            <li>Cryptocurrency or blockchain-based payments.</li>
+            <li>AI-powered product recommendation engine.</li>
+            <li>Multi-language and multi-currency support.</li>
+            <li>Third-party seller API integrations.</li>
+          </ul>
+
+          <div class="big-quote" style="margin-top:22px;">
+            Phase 1 prioritizes a reliable, secure, differentiated web marketplace before expanding into mobile, AI, and internationalization.
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:22px;">
+        <div class="card compact">
+          <h3>🎯 MVP Discipline</h3>
+          <p>Lock minimum viable scope and manage changes through formal approval.</p>
+        </div>
+        <div class="card compact">
+          <h3>🔐 Compliance Built-In</h3>
+          <p>GDPR, PCI-DSS compliant payments, secure authentication, and data protection.</p>
+        </div>
+        <div class="card compact">
+          <h3>📱 Responsive First</h3>
+          <p>Mobile-friendly web experience without native mobile app development in Phase 1.</p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>Scope boundary protects timeline and budget</span>
+        <span>Development team limited to 6 core members</span>
+      </div>
+    </section>
+
+    <!-- Slide 4 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">04 · Key Deliverables, Timeline & Milestones</div>
+          <h1>9-month delivery path from project kickoff to production launch</h1>
+        </div>
+        <div class="slide-no">04</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Key Deliverables</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Deliverable</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>D-02</td>
+                <td><strong>Requirements Specification</strong></td>
+                <td>Functional and non-functional requirements.</td>
+              </tr>
+              <tr>
+                <td>D-03</td>
+                <td><strong>UI/UX Wireframes</strong></td>
+                <td>Low and high-fidelity mockups.</td>
+              </tr>
+              <tr>
+                <td>D-04</td>
+                <td><strong>System Architecture</strong></td>
+                <td>Technical design, database schema, API specs.</td>
+              </tr>
+              <tr>
+                <td>D-06 / D-07</td>
+                <td><strong>Frontend + Backend</strong></td>
+                <td>Responsive web app, APIs, auth, database, payment integration.</td>
+              </tr>
+              <tr>
+                <td>D-08</td>
+                <td><strong>Exchange / Swap Module</strong></td>
+                <td>Peer-to-peer swap functionality.</td>
+              </tr>
+              <tr>
+                <td>D-09 / D-11</td>
+                <td><strong>Admin + Deployed Platform</strong></td>
+                <td>Moderation dashboard and production-ready cloud deployment.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h2>Delivery Summary</h2>
+          <div class="grid-2">
+            <div class="card compact">
+              <h3>📅 Timeline</h3>
+              <p><strong>Sep 1, 2026 → Jun 1, 2027</strong><br />9 months from kickoff to go-live.</p>
+            </div>
+            <div class="card compact">
+              <h3>🧪 QA & UAT</h3>
+              <p>Testing, bug resolution, user acceptance, and launch readiness by Apr 30, 2027.</p>
+            </div>
+            <div class="card compact">
+              <h3>🚀 Go-Live</h3>
+              <p>Production deployment target: <strong>June 1, 2027</strong>.</p>
+            </div>
+            <div class="card compact">
+              <h3>📊 Review</h3>
+              <p>Post-launch performance report and Phase 2 roadmap by July 1, 2027.</p>
+            </div>
+          </div>
+          <div class="big-quote" style="margin-top:18px;">
+            Critical path: requirements → design → prototype → development → QA/UAT → production deployment.
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline">
+        <div class="milestone">
+          <div class="date">Sep 1</div>
+          <div class="name">Kickoff</div>
+          <div class="deliver">Charter signed</div>
+        </div>
+        <div class="milestone">
+          <div class="date">Sep 30</div>
+          <div class="name">Requirements</div>
+          <div class="deliver">BRD / SRS approved</div>
+        </div>
+        <div class="milestone">
+          <div class="date">Oct 31</div>
+          <div class="name">UI/UX Design</div>
+          <div class="deliver">High-fidelity mockups</div>
+        </div>
+        <div class="milestone">
+          <div class="date">Oct 31</div>
+          <div class="name">Architecture</div>
+          <div class="deliver">Architecture and DB design</div>
+        </div>
+        <div class="milestone">
+          <div class="date">Nov 30</div>
+          <div class="name">Prototype</div>
+          <div class="deliver">Working demo</div>
+        </div>
+        <div class="milestone">
+          <div class="date">Mar 15</div>
+          <div class="name">Core Dev</div>
+          <div class="deliver">Frontend + backend built</div>
+        </div>
+        <div class="milestone">
+          <div class="date">Apr 30</div>
+          <div class="name">QA / UAT</div>
+          <div class="deliver">Test report</div>
+        </div>
+        <div class="milestone">
+          <div class="date">Jun 1</div>
+          <div class="name">Launch</div>
+          <div class="deliver">Production deployment</div>
+        </div>
+        <div class="milestone">
+          <div class="date">Jul 1</div>
+          <div class="name">Review</div>
+          <div class="deliver">Post-launch report</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>Milestones M-01 to M-09</span>
+        <span>Project duration: 9 months</span>
+      </div>
+    </section>
+
+    <!-- Slide 5 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">05 · Budget Overview</div>
+          <h1>Total Year 1 investment: $329,200 across CAPEX, OPEX, and contingency</h1>
+        </div>
+        <div class="slide-no">05</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Budget Composition</h2>
+          <div class="donut-wrap">
+            <div class="donut"></div>
+            <div class="legend">
+              <div class="legend-item"><span class="swatch" style="background:var(--primary);"></span> CAPEX Development: $172,000</div>
+              <div class="legend-item"><span class="swatch" style="background:var(--accent);"></span> OPEX Year 1: $140,000</div>
+              <div class="legend-item"><span class="swatch" style="background:var(--green);"></span> Contingency: $17,200</div>
+            </div>
+          </div>
+
+          <div class="metric-row" style="grid-template-columns: repeat(3, 1fr);">
+            <div class="metric">
+              <div class="value">52.2%</div>
+              <div class="label">CAPEX share</div>
+            </div>
+            <div class="metric">
+              <div class="value">42.5%</div>
+              <div class="label">OPEX share</div>
+            </div>
+            <div class="metric">
+              <div class="value">5.2%</div>
+              <div class="label">Contingency share</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Major Cost Drivers</h2>
+
+          <div class="bar-row">
+            <div class="bar-label">Personnel / Development</div>
+            <div class="bar-track"><div class="bar-fill" style="width:100%;"></div></div>
+            <div class="bar-value">$120K</div>
+          </div>
+
+          <div class="bar-row">
+            <div class="bar-label">Customer Support</div>
+            <div class="bar-track"><div class="bar-fill" style="width:33%;"></div></div>
+            <div class="bar-value">$40K</div>
+          </div>
+
+          <div class="bar-row">
+            <div class="bar-label">Marketing & Acquisition</div>
+            <div class="bar-track"><div class="bar-fill" style="width:29%;"></div></div>
+            <div class="bar-value">$35K</div>
+          </div>
+
+          <div class="bar-row">
+            <div class="bar-label">Moderation / Community</div>
+            <div class="bar-track"><div class="bar-fill" style="width:17%;"></div></div>
+            <div class="bar-value">$20K</div>
+          </div>
+
+          <div class="bar-row">
+            <div class="bar-label">UI/UX & Design</div>
+            <div class="bar-track"><div class="bar-fill" style="width:17%;"></div></div>
+            <div class="bar-value">$20K</div>
+          </div>
+
+          <div class="bar-row">
+            <div class="bar-label">Cloud Infrastructure</div>
+            <div class="bar-track"><div class="bar-fill" style="width:15%;"></div></div>
+            <div class="bar-value">$18K</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:22px;">
+        <h2>Financial Logic</h2>
+        <div class="grid-4">
+          <div>
+            <span class="tag">Revenue</span>
+            <h3 style="margin-top:10px;">$220K–$420K</h3>
+            <p>Projected Year 1 revenue from transaction fees, subscriptions, and advertising.</p>
+          </div>
+          <div>
+            <span class="tag orange">Take Rate</span>
+            <h3 style="margin-top:10px;">5–8%</h3>
+            <p>Platform fee retained from transaction value.</p>
+          </div>
+          <div>
+            <span class="tag green">Efficiency</span>
+            <h3 style="margin-top:10px;">LTV/CAC ≥ 3:1</h3>
+            <p>Target acquisition efficiency ratio.</p>
+          </div>
+          <div>
+            <span class="tag rose">Break-even</span>
+            <h3 style="margin-top:10px;">End of Year 2</h3>
+            <p>Operational break-even target after launch scaling.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>Budget based on CAPEX + OPEX Year 1 + 10% CAPEX contingency</span>
+        <span>Total: $329,200</span>
+      </div>
+    </section>
+
+    <!-- Slide 6 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">06 · Team Roles & Stakeholders</div>
+          <h1>Cross-functional delivery team with high-engagement stakeholder governance</h1>
+        </div>
+        <div class="slide-no">06</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Core Team Roles</h2>
+          <div class="role-grid">
+            <div class="role-item">
+              <div class="role-badge">🎯</div>
+              <div>
+                <div class="role-title">Project Sponsor</div>
+                <div class="role-desc">Funding, strategic direction, and final approval.</div>
+              </div>
+            </div>
+
+            <div class="role-item">
+              <div class="role-badge">🧭</div>
+              <div>
+                <div class="role-title">Project Manager</div>
+                <div class="role-desc">Planning, execution, risk, timeline, stakeholder communications.</div>
+              </div>
+            </div>
+
+            <div class="role-item">
+              <div class="role-badge">📋</div>
+              <div>
+                <div class="role-title">Business Analyst</div>
+                <div class="role-desc">Requirements gathering and documentation management.</div>
+              </div>
+            </div>
+
+            <div class="role-item">
+              <div class="role-badge">🏗️</div>
+              <div>
+                <div class="role-title">Lead Architect</div>
+                <div class="role-desc">System architecture, technical design, and technology stack.</div>
+              </div>
+            </div>
+
+            <div class="role-item">
+              <div class="role-badge">💻</div>
+              <div>
+                <div class="role-title">Developers</div>
+                <div class="role-desc">2 frontend and 2 backend developers build web UI, APIs, database, and integrations.</div>
+              </div>
+            </div>
+
+            <div class="role-item">
+              <div class="role-badge">🎨</div>
+              <div>
+                <div class="role-title">UI/UX Designer</div>
+                <div class="role-desc">Wireframes, prototypes, design system, and user journey quality.</div>
+              </div>
+            </div>
+
+            <div class="role-item">
+              <div class="role-badge">🧪</div>
+              <div>
+                <div class="role-title">QA Engineer</div>
+                <div class="role-desc">Test cases, execution, bug tracking, and release quality.</div>
+              </div>
+            </div>
+
+            <div class="role-item">
+              <div class="role-badge">☁️</div>
+              <div>
+                <div class="role-title">DevOps Engineer</div>
+                <div class="role-desc">CI/CD, cloud infrastructure, monitoring, and deployment reliability.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Stakeholder Engagement</h2>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Stakeholder</th>
+                <th>Influence</th>
+                <th>Interest</th>
+                <th>Engagement</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Executive Sponsor</td>
+                <td>High</td>
+                <td>High</td>
+                <td><span class="tag rose">Manage Closely</span></td>
+              </tr>
+              <tr>
+                <td>Project Manager</td>
+                <td>High</td>
+                <td>High</td>
+                <td><span class="tag rose">Manage Closely</span></td>
+              </tr>
+              <tr>
+                <td>Development Team</td>
+                <td>High</td>
+                <td>High</td>
+                <td><span class="tag rose">Manage Closely</span></td>
+              </tr>
+              <tr>
+                <td>Customer Support Team</td>
+                <td>Medium</td>
+                <td>High</td>
+                <td><span class="tag rose">Manage Closely</span></td>
+              </tr>
+              <tr>
+                <td>Independent Artisans</td>
+                <td>Medium</td>
+                <td>High</td>
+                <td><span class="tag green">Keep Informed</span></td>
+              </tr>
+              <tr>
+                <td>Buyers / End Users</td>
+                <td>Low</td>
+                <td>High</td>
+                <td><span class="tag green">Keep Informed</span></td>
+              </tr>
+              <tr>
+                <td>Payment / Legal</td>
+                <td>Medium</td>
+                <td>Medium</td>
+                <td><span class="tag orange">Keep Satisfied</span></td>
+              </tr>
+              <tr>
+                <td>Professor / Evaluator</td>
+                <td>High</td>
+                <td>High</td>
+                <td><span class="tag rose">Manage Closely</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="big-quote" style="margin-top:18px;">
+            Governance focus: manage high-influence stakeholders closely while continuously collecting artisan and buyer feedback.
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>Product & Engineering Department</span>
+        <span>Prepared by Project Management Team</span>
+      </div>
+    </section>
+
+    <!-- Slide 7 -->
+    <section class="slide">
+      <div class="slide-header">
+        <div>
+          <div class="eyebrow">07 · Risks & Mitigation Overview</div>
+          <h1>Key risks are manageable with disciplined scope, early growth strategy, and strong security controls</h1>
+        </div>
+        <div class="slide-no">07</div>
       </div>
 
       <div class="grid-3">
-        <div class="box">
-          <h3>Economic Value</h3>
-          <p>Lower commissions, multiple revenue streams, long-term break-even target by Year 2.</p>
+        <div class="risk-card">
+          <div class="icon rose" style="margin:0;">📉</div>
+          <div>
+            <div class="risk-title">Low Initial User Adoption</div>
+            <div class="risk-text">
+              <strong>Likelihood / Impact:</strong> High / High<br />
+              <strong>Mitigation:</strong> pre-registration, beta campaign, founding artisans, referrals, influencer and craft community partnerships.
+            </div>
+          </div>
         </div>
-        <div class="box orange">
-          <h3>Social Value</h3>
-          <p>Supports micro-entrepreneurs, women artisans, and rural creators.</p>
-        </div>
-        <div class="box red">
-          <h3>Platform Value</h3>
-          <p>Brings marketplace, swap, messaging, reviews, and community features together.</p>
-        </div>
-      </div>
-    </section>
 
-    <section class="slide">
-      <div class="slide-number">Slide 5</div>
-      <h2>Objectives &amp; Success Indicators</h2>
-      <p class="subtitle">Main business and product targets</p>
+        <div class="risk-card">
+          <div class="icon orange" style="margin:0;">🧩</div>
+          <div>
+            <div class="risk-title">Scope Creep</div>
+            <div class="risk-text">
+              <strong>Likelihood / Impact:</strong> High / Medium<br />
+              <strong>Mitigation:</strong> Agile delivery, strict sprint goals, locked MVP baseline, formal change approval.
+            </div>
+          </div>
+        </div>
 
-      <table>
-        <tr>
-          <th>Objective</th>
-          <th>Target</th>
-          <th>Timeline</th>
-        </tr>
-        <tr>
-          <td>Launch fully functional platform</td>
-          <td>Go-live ready</td>
-          <td>Q2 2027 (Jun 1, 2027)</td>
-        </tr>
-        <tr>
-          <td>Onboard artisan seller profiles</td>
-          <td>5,000 profiles</td>
-          <td>6 months post-launch</td>
-        </tr>
-        <tr>
-          <td>Registered buyers</td>
-          <td>20,000 buyers</td>
-          <td>12 months post-launch</td>
-        </tr>
-        <tr>
-          <td>Total sales + swaps</td>
-          <td>10,000 transactions</td>
-          <td>12 months post-launch</td>
-        </tr>
-        <tr>
-          <td>Platform uptime</td>
-          <td>99.5%</td>
-          <td>Ongoing</td>
-        </tr>
-        <tr>
-          <td>User satisfaction</td>
-          <td>≥ 4.2 / 5.0</td>
-          <td>6 months post-launch</td>
-        </tr>
-        <tr>
-          <td>Break-even</td>
-          <td>Operational break-even</td>
-          <td>End of Year 2</td>
-        </tr>
-      </table>
-    </section>
+        <div class="risk-card">
+          <div class="icon blue" style="margin:0;">🔐</div>
+          <div>
+            <div class="risk-title">Payment Fraud / Data Breach</div>
+            <div class="risk-text">
+              <strong>Likelihood / Impact:</strong> Low / Very High<br />
+              <strong>Mitigation:</strong> PCI-DSS gateway, encryption, penetration testing, RBAC, regular audits.
+            </div>
+          </div>
+        </div>
 
-    <section class="slide">
-      <div class="slide-number">Slide 6</div>
-      <h2>Key KPI Categories</h2>
-      <p class="subtitle">How success will be measured</p>
+        <div class="risk-card">
+          <div class="icon purple" style="margin:0;">⚖️</div>
+          <div>
+            <div class="risk-title">GDPR, Tax, E-commerce Compliance</div>
+            <div class="risk-text">
+              <strong>Likelihood / Impact:</strong> Low / High<br />
+              <strong>Mitigation:</strong> legal counsel, compliance audits, consent records, privacy notices, tax review.
+            </div>
+          </div>
+        </div>
 
-      <div class="grid-2">
-        <div class="box">
-          <h3>Product Usage</h3>
-          <ul>
-            <li>DAU / WAU / MAU</li>
-            <li>DAU / MAU Ratio</li>
-            <li>New Users</li>
-            <li>Activation Rate</li>
-            <li>Retention Rate</li>
-          </ul>
+        <div class="risk-card">
+          <div class="icon orange" style="margin:0;">💸</div>
+          <div>
+            <div class="risk-title">Budget Overrun</div>
+            <div class="risk-text">
+              <strong>Likelihood / Impact:</strong> Medium / High<br />
+              <strong>Mitigation:</strong> weekly budget tracking, 10% contingency, milestone-based spending review.
+            </div>
+          </div>
         </div>
-        <div class="box orange">
-          <h3>Trading / Swap</h3>
-          <ul>
-            <li>Total Swap Volume</li>
-            <li>Number of Swaps</li>
-            <li>Unique Traders</li>
-            <li>Swap Success Rate</li>
-            <li>Time to Execute Swap</li>
-          </ul>
-        </div>
-        <div class="box red">
-          <h3>Growth &amp; UX</h3>
-          <ul>
-            <li>New User Growth Rate</li>
-            <li>Referral Rate</li>
-            <li>Funnel Conversion Rate</li>
-            <li>Drop-off Rate</li>
-            <li>NPS / CSAT</li>
-          </ul>
-        </div>
-        <div class="box green">
-          <h3>Financial &amp; Reliability</h3>
-          <ul>
-            <li>Revenue, Take Rate, Gross Margin</li>
-            <li>CAC, LTV, LTV/CAC Ratio</li>
-            <li>Uptime ≥ 99.5%</li>
-            <li>API Latency &lt; 200ms</li>
-            <li>Security alerts and fraud rate</li>
-          </ul>
-        </div>
-      </div>
-    </section>
 
-    <section class="slide">
-      <div class="slide-number">Slide 7</div>
-      <h2>Solution Options &amp; Recommendation</h2>
-      <p class="subtitle">Evaluation of strategic choices</p>
+        <div class="risk-card">
+          <div class="icon rose" style="margin:0;">📣</div>
+          <div>
+            <div class="risk-title">High CAC / Weak Conversion</div>
+            <div class="risk-text">
+              <strong>Likelihood / Impact:</strong> High / High<br />
+              <strong>Mitigation:</strong> organic growth, referrals, community partnerships, niche campaigns, reduce paid acquisition reliance.
+            </div>
+          </div>
+        </div>
 
-      <div class="grid-3">
-        <div class="box red">
-          <h3>Option A: Do Nothing</h3>
-          <ul>
-            <li>No investment required</li>
-            <li>No project risk</li>
-            <li>But market opportunity is lost</li>
-            <li>Artisan pain points remain unsolved</li>
-          </ul>
+        <div class="risk-card">
+          <div class="icon green" style="margin:0;">🛡️</div>
+          <div>
+            <div class="risk-title">Exchange System Abuse</div>
+            <div class="risk-text">
+              <strong>Likelihood / Impact:</strong> Medium / Medium<br />
+              <strong>Mitigation:</strong> user verification, listing moderation, escrow-style controls, transparent dispute process.
+            </div>
+          </div>
         </div>
-        <div class="box orange">
-          <h3>Option B: Basic Listing Website</h3>
-          <ul>
-            <li>Lower cost</li>
-            <li>Faster to launch</li>
-            <li>But weak differentiation</li>
-            <li>Does not solve exchange/community gap</li>
-          </ul>
+
+        <div class="risk-card">
+          <div class="icon blue" style="margin:0;">⚙️</div>
+          <div>
+            <div class="risk-title">Technical Debt / Poor Performance</div>
+            <div class="risk-text">
+              <strong>Likelihood / Impact:</strong> Medium / Medium<br />
+              <strong>Mitigation:</strong> code reviews, performance benchmarks, QA gates, scheduled refactoring.
+            </div>
+          </div>
         </div>
-        <div class="box green">
-          <h3>Option C: Full SwapCraft Platform</h3>
-          <ul>
-            <li>Marketplace + exchange + community</li>
-            <li>Strong differentiation</li>
-            <li>Multiple revenue streams</li>
-            <li>Recommended option</li>
-          </ul>
+
+        <div class="risk-card">
+          <div class="icon purple" style="margin:0;">🏪</div>
+          <div>
+            <div class="risk-title">Strong Competition</div>
+            <div class="risk-text">
+              <strong>Likelihood / Impact:</strong> High / Medium<br />
+              <strong>Mitigation:</strong> exchange-first value proposition, lower fees, niche community positioning, handmade integrity.
+            </div>
+          </div>
         </div>
       </div>
 
-      <div class="box green">
-        <p><strong>Recommendation:</strong> Proceed with <strong>Option C</strong> because it best addresses user needs, supports long-term growth, creates competitive advantage, and aligns with the project charter and business case.</p>
+      <div class="card" style="margin-top:22px;">
+        <h2>Risk Management Priorities</h2>
+        <div class="pill-list">
+          <span class="pill">Build marketplace liquidity before public launch</span>
+          <span class="pill">Keep MVP scope controlled</span>
+          <span class="pill">Continuously monitor security and fraud</span>
+          <span class="pill">Track LTV/CAC monthly</span>
+          <span class="pill">Prepare support workflows early</span>
+          <span class="pill">Maintain fallback payment provider options</span>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>Risk categories: Operational, Security, Regulatory, Financial</span>
+        <span>Risk outlook: challenging but controllable with active governance</span>
       </div>
     </section>
 
+    <!-- Slide 8 -->
     <section class="slide">
-      <div class="slide-number">Slide 8</div>
-      <h2>Project Scope</h2>
-      <p class="subtitle">What is included and excluded in Phase 1</p>
-
-      <div class="grid-2">
-        <div class="box green">
-          <h3>In Scope</h3>
-          <ul>
-            <li>Web-based marketplace</li>
-            <li>Exchange/swap system</li>
-            <li>Creator profiles</li>
-            <li>Secure payment gateway</li>
-            <li>Order management and tracking</li>
-            <li>Review and rating system</li>
-            <li>Community forums and messaging</li>
-            <li>Custom orders / commissions</li>
-            <li>Admin dashboard</li>
-            <li>Search, filters, category browsing</li>
-            <li>Seller analytics dashboard</li>
-            <li>Customer support ticketing</li>
-          </ul>
-        </div>
-        <div class="box red">
-          <h3>Out of Scope</h3>
-          <ul>
-            <li>Native mobile app</li>
-            <li>Physical shipping/logistics management</li>
-            <li>Cryptocurrency / blockchain payments</li>
-            <li>AI recommendation engine</li>
-            <li>Multi-language / multi-currency support</li>
-            <li>Third-party seller API integrations</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide">
-      <div class="slide-number">Slide 9</div>
-      <h2>Key Deliverables</h2>
-      <p class="subtitle">Main outputs of the project</p>
-
-      <table>
-        <tr>
-          <th>ID</th>
-          <th>Deliverable</th>
-          <th>Description</th>
-        </tr>
-        <tr><td>D-01</td><td>Project Charter</td><td>Formal project authorization document</td></tr>
-        <tr><td>D-02</td><td>Requirements Specification</td><td>Functional and non-functional requirements</td></tr>
-        <tr><td>D-03</td><td>UI/UX Wireframes</td><td>Low and high-fidelity mockups</td></tr>
-        <tr><td>D-04</td><td>System Architecture</td><td>Technical design, DB schema, API specs</td></tr>
-        <tr><td>D-05</td><td>Working Prototype</td><td>Clickable prototype for review</td></tr>
-        <tr><td>D-06</td><td>Frontend Application</td><td>Responsive web app</td></tr>
-        <tr><td>D-07</td><td>Backend System</td><td>APIs, database, authentication, payment</td></tr>
-        <tr><td>D-08</td><td>Exchange/Swap Module</td><td>Functional peer-to-peer swap system</td></tr>
-        <tr><td>D-09</td><td>Admin Dashboard</td><td>Management and moderation tools</td></tr>
-        <tr><td>D-10</td><td>QA Test Report</td><td>Testing results and bug log</td></tr>
-        <tr><td>D-11</td><td>Deployed Platform</td><td>Production-ready cloud platform</td></tr>
-        <tr><td>D-12</td><td>Post-Launch Report</td><td>Metrics, lessons learned, roadmap</td></tr>
-      </table>
-    </section>
-
-    <section class="slide">
-      <div class="slide-number">Slide 10</div>
-      <h2>How the Platform Works</h2>
-      <p class="subtitle">Simplified user flow</p>
-
-      <div class="flow">
-        <div class="flow-step">Artisan creates profile</div>
-        <div class="arrow">→</div>
-        <div class="flow-step">Lists product or material</div>
-        <div class="arrow">→</div>
-        <div class="flow-step">Buyer browses or artisan proposes swap</div>
-        <div class="arrow">→</div>
-        <div class="flow-step">Payment or exchange initiated</div>
-        <div class="arrow">→</div>
-        <div class="flow-step">Order / swap completed</div>
-        <div class="arrow">→</div>
-        <div class="flow-step">Review &amp; community interaction</div>
-      </div>
-
-      <div class="grid-3" style="margin-top: 24px;">
-        <div class="box">
-          <h3>Marketplace Layer</h3>
-          <p>Listings, profiles, search, purchase, commissions.</p>
-        </div>
-        <div class="box orange">
-          <h3>Exchange Layer</h3>
-          <p>Swaps of materials and finished products between creators.</p>
-        </div>
-        <div class="box green">
-          <h3>Community Layer</h3>
-          <p>Forums, messaging, reviews, collaboration and engagement.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="slide">
-      <div class="slide-number">Slide 11</div>
-      <h2>Timeline &amp; Milestones</h2>
-      <p class="subtitle">Main project schedule</p>
-
-      <table>
-        <tr>
-          <th>ID</th>
-          <th>Milestone</th>
-          <th>Target Date</th>
-          <th>Key Deliverable</th>
-        </tr>
-        <tr><td>M-01</td><td>Project Kick-off</td><td>Sep 1, 2026</td><td>Project Charter signed</td></tr>
-        <tr><td>M-02</td><td>Requirements Finalized</td><td>Sep 30, 2026</td><td>BRD / SRS approved</td></tr>
-        <tr><td>M-03</td><td>UI/UX Design Complete</td><td>Oct 31, 2026</td><td>High-fidelity mockups</td></tr>
-        <tr><td>M-04</td><td>Architecture &amp; DB Design</td><td>Oct 31, 2026</td><td>Architecture document</td></tr>
-        <tr><td>M-05</td><td>Prototype Review</td><td>Nov 30, 2026</td><td>Prototype demo</td></tr>
-        <tr><td>M-06</td><td>Core Development Complete</td><td>Mar 15, 2027</td><td>Backend + Frontend built</td></tr>
-        <tr><td>M-07</td><td>QA &amp; UAT</td><td>Apr 30, 2027</td><td>QA report</td></tr>
-        <tr><td>M-08</td><td>Platform Launch</td><td>Jun 1, 2027</td><td>Production deployment</td></tr>
-        <tr><td>M-09</td><td>Post-Launch Review</td><td>Jul 1, 2027</td><td>Post-launch report</td></tr>
-      </table>
-    </section>
-
-    <section class="slide">
-      <div class="slide-number">Slide 12</div>
-      <h2>Budget, Revenue, Team &amp; Risks</h2>
-      <p class="subtitle">Management overview</p>
-
-      <div class="grid-2">
+      <div class="slide-header">
         <div>
-          <div class="box green">
-            <h3>Budget Overview</h3>
-            <ul>
-              <li>CAPEX: <strong>$172,000</strong></li>
-              <li>OPEX Year 1: <strong>$140,000</strong></li>
-              <li>Contingency: <strong>$17,200</strong></li>
-              <li>Total: <strong>$329,200</strong></li>
-            </ul>
-          </div>
-          <div class="box orange">
-            <h3>Revenue Model</h3>
-            <ul>
-              <li>Transaction fees: $150K–$300K</li>
-              <li>Subscriptions: $50K–$80K</li>
-              <li>Advertising: $20K–$40K</li>
-              <li>Year 1 target: $220K–$420K</li>
-            </ul>
+          <div class="eyebrow">08 · Summary & Recommendation</div>
+          <h1>Approve and proceed with SwapCraft as a differentiated, scalable, and socially valuable platform</h1>
+        </div>
+        <div class="slide-no">08</div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h2>Executive Summary</h2>
+          <ul>
+            <li>SwapCraft addresses a clear market gap: a dedicated handmade craft platform that combines <strong>e-commerce, peer-to-peer exchange, and community collaboration</strong>.</li>
+            <li>Existing competitors are either too generic, too expensive, or lack exchange and collaboration functionality.</li>
+            <li>The full-featured platform is the recommended option because it maximizes long-term value, retention, differentiation, and community impact.</li>
+            <li>Revenue model combines <strong>transaction fees, premium subscriptions, and advertising / promoted listings</strong>.</li>
+            <li>The project has a realistic path to <strong>operational break-even by the end of Year 2</strong>, provided adoption, monetization, and cost controls are actively managed.</li>
+          </ul>
+
+          <div class="big-quote" style="margin-top:22px;">
+            Recommendation: Approve and proceed. The opportunity is timely, the need is validated, and delay risks ceding the niche to a competitor.
           </div>
         </div>
-        <div>
-          <div class="box">
-            <h3>Core Team</h3>
-            <ul>
-              <li>Project Sponsor</li>
-              <li>Project Manager</li>
-              <li>Business Analyst</li>
-              <li>Lead Architect</li>
-              <li>Frontend Developers ×2</li>
-              <li>Backend Developers ×2</li>
-              <li>UI/UX Designer, QA, DevOps</li>
-            </ul>
-          </div>
-          <div class="box red">
-            <h3>Key Risks</h3>
-            <ul>
-              <li>Low early user adoption</li>
-              <li>Scope creep</li>
-              <li>High customer acquisition cost</li>
-              <li>Competition from Etsy / Amazon Handmade</li>
-              <li>Security breach or payment fraud</li>
-              <li>Budget overrun</li>
-            </ul>
-          </div>
+
+        <div class="card">
+          <h2>Key Facts at a Glance</h2>
+          <table class="table">
+            <tbody>
+              <tr>
+                <td><strong>Project ID</strong></td>
+                <td>SC-2026-001</td>
+              </tr>
+              <tr>
+                <td><strong>Project Name</strong></td>
+                <td>SwapCraft — Handmade Craft Exchange Platform</td>
+              </tr>
+              <tr>
+                <td><strong>Department</strong></td>
+                <td>Product & Engineering</td>
+              </tr>
+              <tr>
+                <td><strong>Development Timeline</strong></td>
+                <td>Sep 1, 2026 → Jun 1, 2027</td>
+              </tr>
+              <tr>
+                <td><strong>Total Investment</strong></td>
+                <td>$329,200 CAPEX + OPEX Year 1 + contingency</td>
+              </tr>
+              <tr>
+                <td><strong>Year 1 Revenue Target</strong></td>
+                <td>$220,000 – $420,000</td>
+              </tr>
+              <tr>
+                <td><strong>Launch Target</strong></td>
+                <td>June 1, 2027</td>
+              </tr>
+              <tr>
+                <td><strong>Break-even Target</strong></td>
+                <td>End of Year 2</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
+
+      <div class="grid-4" style="margin-top:22px;">
+        <div class="card compact">
+          <div class="icon purple">🔁</div>
+          <h3>Unique Value</h3>
+          <p>Integrated swap and marketplace mechanics.</p>
+        </div>
+        <div class="card compact">
+          <div class="icon green">🌱</div>
+          <h3>Social Impact</h3>
+          <p>Supports independent makers and circular economy behavior.</p>
+        </div>
+        <div class="card compact">
+          <div class="icon orange">💰</div>
+          <h3>Commercial Potential</h3>
+          <p>Multiple revenue streams with scalable growth model.</p>
+        </div>
+        <div class="card compact">
+          <div class="icon blue">🚀</div>
+          <h3>Next Step</h3>
+          <p>Approve charter, finalize requirements, begin execution.</p>
+        </div>
+      </div>
+
+      <div class="footer">
+        <span>Prepared for President Rosemary · EPITA PM Group · Spring 2026</span>
+        <span>Final recommendation: Proceed</span>
       </div>
     </section>
 
-    <section class="slide">
-      <div class="slide-number">Slide 13</div>
-      <h2>Summary &amp; Recommendation</h2>
-      <p class="subtitle">Final conclusion</p>
-
-      <div class="box green">
-        <ul>
-          <li>SwapCraft addresses a real gap in the handmade market.</li>
-          <li>It combines marketplace, swap system, and community collaboration in one platform.</li>
-          <li>The project has clear objectives, measurable KPIs, and a realistic roadmap.</li>
-          <li>The recommended option is the full-featured platform.</li>
-          <li>The project targets long-term sustainability and break-even by the end of Year 2.</li>
-        </ul>
-      </div>
-
-      <div class="box orange">
-        <p><strong>Final Recommendation:</strong> Approve and proceed with the SwapCraft project. The market opportunity is attractive, the business value is clear, and the platform offers strong differentiation through its exchange-based and community-first model.</p>
-      </div>
-
-      <p class="small">End of presentation.</p>
-    </section>
-
-  </div>
+  </main>
 </body>
 </html>
