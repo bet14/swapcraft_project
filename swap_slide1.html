@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SwapCraft — Project Presentation</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #1a1a2e; color: #eee; }
+
+  .slide {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 80px;
+    page-break-after: always;
+    border-bottom: 3px solid #16213e;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Slide number badge */
+  .slide-num {
+    position: absolute;
+    top: 24px; right: 36px;
+    font-size: 13px; color: #a78bfa; font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  /* ---- COLOR THEMES ---- */
+  .slide-cover   { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); }
+  .slide-dark    { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+  .slide-accent  { background: linear-gradient(135deg, #16213e, #0f3460); }
+  .slide-purple  { background: linear-gradient(135deg, #1e1b4b, #312e81); }
+  .slide-teal    { background: linear-gradient(135deg, #0d2137, #0a3d62); }
+  .slide-green   { background: linear-gradient(135deg, #0d2b1e, #1a4731); }
+  .slide-red     { background: linear-gradient(135deg, #2d0a0a, #4a1010); }
+  .slide-end     { background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); }
+
+  /* ---- TYPOGRAPHY ---- */
+  h1 { font-size: 52px; font-weight: 800; color: #a78bfa; line-height: 1.15; }
+  h1 span { color: #f59e0b; }
+  h2 { font-size: 34px; font-weight: 700; color: #a78bfa; margin-bottom: 28px; border-left: 5px solid #f59e0b; padding-left: 16px; }
+  h3 { font-size: 20px; font-weight: 700; color: #f59e0b; margin-bottom: 10px; }
+  p  { font-size: 17px; line-height: 1.7; color: #cbd5e1; }
+  .subtitle { font-size: 22px; color: #94a3b8; margin-top: 14px; }
+  .tagline  { font-size: 26px; color: #f59e0b; font-style: italic; margin-top: 20px; }
+
+  /* ---- BADGES ---- */
+  .badge-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 28px; }
+  .badge {
+    background: rgba(167,139,250,0.15); border: 1px solid #a78bfa;
+    border-radius: 20px; padding: 6px 18px;
+    font-size: 14px; color: #a78bfa; font-weight: 600;
+  }
+  .badge.yellow { background: rgba(245,158,11,0.15); border-color: #f59e0b; color: #f59e0b; }
+  .badge.green  { background: rgba(52,211,153,0.15); border-color: #34d399; color: #34d399; }
+
+  /* ---- CARDS ---- */
+  .card-grid { display: grid; gap: 18px; margin-top: 10px; }
+  .card-grid-2 { grid-template-columns: 1fr 1fr; }
+  .card-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .card-grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+  .card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(167,139,250,0.25);
+    border-radius: 12px; padding: 20px;
+  }
+  .card.yellow-border { border-color: rgba(245,158,11,0.4); }
+  .card.green-border  { border-color: rgba(52,211,153,0.4); }
+  .card.red-border    { border-color: rgba(248,113,113,0.4); }
+
+  /* ---- BULLET LISTS ---- */
+  ul.bullets { list-style: none; padding: 0; margin-top: 8px; }
+  ul.bullets li { padding: 6px 0 6px 24px; position: relative; font-size: 16px; color: #cbd5e1; line-height: 1.5; }
+  ul.bullets li::before { content: "▸"; position: absolute; left: 0; color: #a78bfa; }
+  ul.bullets.yellow li::before { color: #f59e0b; }
+  ul.bullets.green  li::before { color: #34d399; }
+  ul.bullets.red    li::before { color: #f87171; }
+
+  /* ---- TABLE ---- */
+  table { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 15px; }
+  th { background: rgba(167,139,250,0.2); color: #a78bfa; padding: 10px 14px; text-align: left; font-weight: 700; }
+  td { padding: 9px 14px; border-bottom: 1px solid rgba(255,255,255,0.07); color: #cbd5e1; }
+  tr:hover td { background: rgba(255,255,255,0.04); }
+  td.highlight { color: #f59e0b; font-weight: 600; }
+  td.green { color: #34d399; font-weight: 600; }
+  td.red   { color: #f87171; font-weight: 600; }
+
+  /* ---- TIMELINE ---- */
+  .timeline { display: flex; flex-direction: column; gap: 0; margin-top: 10px; }
+  .tl-item { display: flex; align-items: flex-start; gap: 18px; padding: 10px 0; }
+  .tl-dot {
+    width: 14px; height: 14px; border-radius: 50%;
+    background: #a78bfa; flex-shrink: 0; margin-top: 5px;
+    box-shadow: 0 0 8px #a78bfa;
+  }
+  .tl-dot.yellow { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
+  .tl-dot.green  { background: #34d399; box-shadow: 0 0 8px #34d399; }
+  .tl-line { width: 2px; background: rgba(167,139,250,0.3); margin-left: 6px; height: 20px; }
+  .tl-content h4 { font-size: 15px; color: #f59e0b; font-weight: 700; }
+  .tl-content p  { font-size: 14px; color: #94a3b8; margin-top: 2px; }
+
+  /* ---- STAT BOX ---- */
+  .stat-box { text-align: center; padding: 22px 10px; }
+  .stat-box .num { font-size: 38px; font-weight: 800; color: #f59e0b; }
+  .stat-box .label { font-size: 13px; color: #94a3b8; margin-top: 6px; }
+
+  /* ---- DIVIDER ---- */
+  .divider { width: 60px; height: 4px; background: #f59e0b; border-radius: 2px; margin: 16px 0; }
+
+  /* ---- RISK PILL ---- */
+  .risk-pill {
+    display: inline-block; padding: 2px 10px; border-radius: 10px;
+    font-size: 12px; font-weight: 700;
+  }
+  .risk-high   { background: rgba(248,113,113,0.2); color: #f87171; }
+  .risk-medium { background: rgba(251,191,36,0.2);  color: #fbbf24; }
+  .risk-low    { background: rgba(52,211,153,0.2);  color: #34d399; }
+
+  /* ---- FLOW DIAGRAM ---- */
+  .flow { display: flex; align-items: center; gap: 0; flex-wrap: wrap; margin-top: 18px; }
+  .flow-box {
+    background: rgba(167,139,250,0.12); border: 1px solid #a78bfa;
+    border-radius: 10px; padding: 12px 18px;
+    font-size: 14px; color: #e2e8f0; font-weight: 600; text-align: center;
+    min-width: 120px;
+  }
+  .flow-box.yellow { background: rgba(245,158,11,0.12); border-color: #f59e0b; color: #f59e0b; }
+  .flow-box.green  { background: rgba(52,211,153,0.12); border-color: #34d399; color: #34d399; }
+  .flow-arrow { font-size: 22px; color: #a78bfa; padding: 0 8px; }
+
+  /* ---- PRINT / EXPORT ---- */
+  @media print {
+    .slide { min-height: 100vh; page-break-after: always; }
+    body { background: #1a1a2e; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== SLIDE 1: COVER ===== -->
+<div class="slide slide-cover">
+  <div class="slide-num">01 / 10</div>
+  <div style="max-width:800px">
+    <div class="badge-row" style="margin-bottom:24px">
+      <span class="badge">SC-2026-001 v1.1</span>
+      <span class="badge yellow">Sep 2026 → Jun 2027</span>
+      <span class="badge green">Status: Active</span>
+    </div>
+    <h1>Swap<span>Craft</span></h1>
+    <p class="subtitle">Handmade Craft Exchange Platform</p>
+    <div class="divider"></div>
+    <p class="tagline">"Where Makers Meet, Trade & Thrive"</p>
+    <p style="margin-top:28px; font-size:16px; color:#94a3b8;">
+      A full-featured e-commerce &amp; peer-to-peer exchange platform<br>
+      empowering independent artisans and handmade craft communities.
+    </p>
+    <div class="badge-row" style="margin-top:36px">
+      <span class="badge">Product &amp; Engineering</span>
+      <span class="badge yellow">Budget: $329,200</span>
+      <span class="badge green">9-Month Build</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 2: PROBLEM & OPPORTUNITY ===== -->
+<div class="slide slide-dark">
+  <div class="slide-num">02 / 10</div>
+  <h2>Problem &amp; Market Opportunity</h2>
+  <div class="card-grid card-grid-2">
+    <div>
+      <div class="card red-border">
+        <h3>🚫 The Problem</h3>
+        <ul class="bullets red">
+          <li>Existing platforms (Etsy, Amazon Handmade) are oversaturated with high fees</li>
+          <li>No dedicated peer-to-peer exchange / barter mechanism for artisans</li>
+          <li>Generic platforms lack meaningful creator identity &amp; storytelling</li>
+          <li>Creators are isolated — no collaborative space for co-creation</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card green-border">
+        <h3>📈 Market Opportunity</h3>
+        <ul class="bullets green">
+          <li>Global handmade crafts market: <strong style="color:#34d399">$739.95B (2024)</strong> → $983B by 2030</li>
+          <li>CAGR: <strong style="color:#34d399">4.9%</strong> (2025–2030)</li>
+          <li>Online craft marketplace: <strong style="color:#34d399">$15B</strong>, growing at 12%/yr</li>
+          <li>No competitor offers integrated exchange + community features</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-top:18px">
+    <h3>💡 SwapCraft Differentiators</h3>
+    <div class="card-grid card-grid-4" style="margin-top:10px">
+      <div style="text-align:center; padding:10px">
+        <div style="font-size:28px">🔄</div>
+        <p style="font-size:13px; color:#a78bfa; font-weight:600; margin-top:6px">Unique Swap<br>Mechanics</p>
+      </div>
+      <div style="text-align:center; padding:10px">
+        <div style="font-size:28px">💸</div>
+        <p style="font-size:13px; color:#a78bfa; font-weight:600; margin-top:6px">Lower Fees<br>(5% vs ~10–15%)</p>
+      </div>
+      <div style="text-align:center; padding:10px">
+        <div style="font-size:28px">🤝</div>
+        <p style="font-size:13px; color:#a78bfa; font-weight:600; margin-top:6px">Community-First<br>Design</p>
+      </div>
+      <div style="text-align:center; padding:10px">
+        <div style="font-size:28px">🎨</div>
+        <p style="font-size:13px; color:#a78bfa; font-weight:600; margin-top:6px">Seller<br>Empowerment</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 3: OBJECTIVES ===== -->
+<div class="slide slide-accent">
+  <div class="slide-num">03 / 10</div>
+  <h2>Project Objectives</h2>
+  <table>
+    <thead>
+      <tr><th>ID</th><th>Objective</th><th>Target</th><th>Timeline</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="highlight">OBJ-01</td><td>Launch fully functional platform</td><td>Go-live ready</td><td class="green">Q2 2027 — Jun 1</td></tr>
+      <tr><td class="highlight">OBJ-02</td><td>Onboard active artisan seller profiles</td><td>5,000 profiles</td><td>6 months post-launch</td></tr>
+      <tr><td class="highlight">OBJ-03</td><td>Registered buyers</td><td>20,000 buyers</td><td>12 months post-launch</td></tr>
+      <tr><td class="highlight">OBJ-04</td><td>Facilitate peer-to-peer transactions</td><td>10,000 transactions</td><td>12 months post-launch</td></tr>
+      <tr><td class="highlight">OBJ-05</td><td>Platform reliability</td><td>≥ 99.5% uptime</td><td>Ongoing from launch</td></tr>
+      <tr><td class="highlight">OBJ-06</td><td>Secure payment gateway</td><td>PCI-DSS compliant</td><td>Before launch</td></tr>
+      <tr><td class="highlight">OBJ-07</td><td>User satisfaction score</td><td>≥ 4.2 / 5.0</td><td>6 months post-launch</td></tr>
+      <tr><td class="highlight">OBJ-08</td><td>Community engagement</td><td>500 active forum users/mo</td><td>6 months post-launch</td></tr>
+      <tr><td class="highlight">OBJ-09</td><td>Platform break-even</td><td>Operational break-even</td><td class="green">End of Year 2</td></tr>
+      <tr><td class="highlight">OBJ-10</td><td>Reduce artisan fee dependency</td><td>Commission ≥ 30% lower than competitors</td><td>12 months post-launch</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== SLIDE 4: SCOPE ===== -->
+<div class="slide slide-purple">
+  <div class="slide-num">04 / 10</div>
+  <h2>Project Scope</h2>
+  <div class="card-grid card-grid-2">
+    <div class="card green-border">
+      <h3>✅ In Scope</h3>
+      <ul class="bullets green">
+        <li>Web-based marketplace (buy, sell, list handmade crafts)</li>
+        <li>Peer-to-peer exchange / swap system</li>
+        <li>Creator profiles (portfolio, bio, story)</li>
+        <li>Secure payment gateway (card, PayPal, wallets)</li>
+        <li>Order management &amp; real-time tracking</li>
+        <li>Review &amp; rating system</li>
+        <li>Community forums &amp; direct messaging</li>
+        <li>Custom order &amp; commission requests</li>
+        <li>Admin dashboard &amp; moderation tools</li>
+        <li>Search, filter, category browsing</li>
+        <li>Email notifications &amp; alerts</li>
+        <li>Basic analytics dashboard for sellers</li>
+        <li>Customer support ticketing system</li>
+      </ul>
+    </div>
+    <div class="card red-border">
+      <h3>🚫 Out of Scope (Phase 2)</h3>
+      <ul class="bullets red">
+        <li>Native mobile app (iOS / Android)</li>
+        <li>Physical shipping or logistics management</li>
+        <li>Cryptocurrency / blockchain payments</li>
+        <li>AI-powered product recommendation engine</li>
+        <li>Multi-language / multi-currency support</li>
+        <li>Third-party seller API integrations</li>
+      </ul>
+      <div style="margin-top:18px; padding:12px; background:rgba(245,158,11,0.1); border-radius:8px; border:1px solid rgba(245,158,11,0.3)">
+        <p style="font-size:13px; color:#f59e0b;">
+          ⚠️ Scope is locked at baseline. Any additions require formal change control approval.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 5: TIMELINE & MILESTONES ===== -->
+<div class="slide slide-teal">
+  <div class="slide-num">05 / 10</div>
+  <h2>Timeline &amp; Milestones</h2>
+  <div style="display:flex; gap:30px; align-items:flex-start; margin-top:10px">
+    <div style="flex:1">
+      <div class="timeline">
+        <div class="tl-item">
+          <div>
+            <div class="tl-dot yellow"></div>
+            <div class="tl-line"></div>
+          </div>
+          <div class="tl-content"><h4>M-01 — Sep 1, 2026</h4><p>Project Kick-off · Charter signed</p></div>
+        </div>
+        <div class="tl-item">
+          <div><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content"><h4>M-02 — Sep 30, 2026</h4><p>Requirements Finalized · BRD/SRS approved</p></div>
+        </div>
+        <div class="tl-item">
+          <div><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content"><h4>M-03 — Oct 31, 2026</h4><p>UI/UX Design Complete · High-fidelity mockups</p></div>
+        </div>
+        <div class="tl-item">
+          <div><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content"><h4>M-04 — Oct 31, 2026</h4><p>Architecture &amp; DB Design · System architecture doc</p></div>
+        </div>
+        <div class="tl-item">
+          <div><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content"><h4>M-05 — Nov 30, 2026</h4><p>Prototype Review · Working prototype demo</p></div>
+        </div>
+        <div class="tl-item">
+          <div><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content"><h4>M-06 — Mar 15, 2027</h4><p>Core Development Complete · Backend + Frontend</p></div>
+        </div>
+        <div class="tl-item">
+          <div><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content"><h4>M-07 — Apr 30, 2027</h4><p>QA &amp; User Acceptance Testing · QA test report</p></div>
+        </div>
+        <div class="tl-item">
+          <div><div class="tl-dot green"></div><div class="tl-line"></div></div>
+          <div class="tl-content"><h4>M-08 — Jun 1, 2027 🚀</h4><p>Platform Launch (Go-Live) · Production deployment</p></div>
+        </div>
+        <div class="tl-item">
+          <div><div class="tl-dot yellow"></div></div>
+          <div class="tl-content"><h4>M-09 — Jul 1, 2027</h4><p>Post-Launch Review · Post-launch report</p></div>
+        </div>
+      </div>
+    </div>
+    <div style="flex:0.6">
+      <div class="card" style="margin-bottom:14px">
+        <h3>📦 Key Deliverables</h3>
+        <ul class="bullets" style="margin-top:8px">
+          <li>Project Charter (D-01)</li>
+          <li>Requirements Specification (D-02)</li>
+          <li>UI/UX Wireframes (D-03)</li>
+          <li>System Architecture (D-04)</li>
+          <li>Working Prototype (D-05)</li>
+          <li>Frontend Application (D-06)</li>
+          <li>Backend System (D-07)</li>
+          <li>Exchange/Swap Modules (D-08)</li>
+          <li>Admin Dashboard (D-09)</li>
+          <li>QA Test Report (D-10)</li>
+          <li>Deployed Platform (D-11)</li>
+          <li>Post-Launch Report (D-12)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 6: BUDGET ===== -->
+<div class="slide slide-dark">
+  <div class="slide-num">06 / 10</div>
+  <h2>Budget Overview</h2>
+  <div class="card-grid card-grid-4" style="margin-bottom:20px">
+    <div class="card stat-box">
+      <div class="num">$172K</div>
+      <div class="label">CAPEX<br>Development</div>
+    </div>
+    <div class="card stat-box">
+      <div class="num">$140K</div>
+      <div class="label">OPEX<br>Year 1 Ops</div>
+    </div>
+    <div class="card stat-box">
+      <div class="num">$17.2K</div>
+      <div class="label">Contingency<br>(10% of CAPEX)</div>
+    </div>
+    <div class="card stat-box" style="border-color: rgba(52,211,153,0.5)">
+      <div class="num" style="color:#34d399">$329.2K</div>
+      <div class="label">TOTAL<br>Budget</div>
+    </div>
+  </div>
+  <div class="card-grid card-grid-2">
+    <div class="card yellow-border">
+      <h3>💰 CAPEX Breakdown</h3>
+      <table style="margin-top:8px; font-size:14px">
+        <tr><td>Personnel (PM, BA, Dev×4, QA, DevOps)</td><td class="highlight">$120,000</td></tr>
+        <tr><td>UI/UX &amp; Design</td><td class="highlight">$20,000</td></tr>
+        <tr><td>Security &amp; Compliance</td><td class="highlight">$10,000</td></tr>
+        <tr><td>Legal &amp; Compliance</td><td class="highlight">$8,000</td></tr>
+        <tr><td>Payment Gateway Integration</td><td class="highlight">$8,000</td></tr>
+        <tr><td>QA Testing</td><td class="highlight">$6,000</td></tr>
+      </table>
+    </div>
+    <div class="card green-border">
+      <h3>🔧 OPEX Breakdown (Year 1)</h3>
+      <table style="margin-top:8px; font-size:14px">
+        <tr><td>Customer Support Team</td><td class="green">$40,000</td></tr>
+        <tr><td>Marketing &amp; User Acquisition</td><td class="green">$35,000</td></tr>
+        <tr><td>Moderation &amp; Community Mgmt</td><td class="green">$20,000</td></tr>
+        <tr><td>Cloud Infrastructure</td><td class="green">$18,000</td></tr>
+        <tr><td>Platform Maintenance</td><td class="green">$15,000</td></tr>
+        <tr><td>Third-party Services</td><td class="green">$12,000</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 7: REVENUE & FINANCIALS ===== -->
+<div class="slide slide-green">
+  <div class="slide-num">07 / 10</div>
+  <h2>Revenue Model &amp; Financial Projections</h2>
+  <div class="card-grid card-grid-3" style="margin-bottom:20px">
+    <div class="card green-border stat-box">
+      <div class="num">$150K–$300K</div>
+      <div class="label">Transaction Revenue<br>(5–8% commission)</div>
+    </div>
+    <div class="card green-border stat-box">
+      <div class="num">$50K–$80K</div>
+      <div class="label">Subscription Revenue<br>(Premium seller accounts)</div>
+    </div>
+    <div class="card green-border stat-box">
+      <div class="num">$20K–$40K</div>
+      <div class="label">Advertising Revenue<br>(Promoted listings)</div>
+    </div>
+  </div>
+  <div class="card-grid card-grid-2">
+    <div class="card">
+      <h3>📊 Year 1 Financial Summary</h3>
+      <table style="margin-top:8px; font-size:15px">
+        <tr><td>Total Investment</td><td class="highlight">$329,200</td></tr>
+        <tr><td>Year 1 Revenue (Projected)</td><td class="green">$220,000 – $420,000</td></tr>
+        <tr><td>Take Rate</td><td class="highlight">5–8%</td></tr>
+        <tr><td>Break-even Target</td><td class="green">End of Year 2</td></tr>
+        <tr><td>LTV / CAC Ratio Target</td><td class="green">≥ 3:1</td></tr>
+      </table>
+    </div>
+    <div class="card yellow-border">
+      <h3>🏆 Competitor Fee Comparison</h3>
+      <table style="margin-top:8px; font-size:14px">
+        <thead><tr><th>Platform</th><th>Total Fee (~$100 sale)</th></tr></thead>
+        <tr><td>Amazon Handmade</td><td class="red">15%</td></tr>
+        <tr><td>Etsy</td><td class="red">~9.75%</td></tr>
+        <tr><td>iCraft</td><td style="color:#fbbf24; font-weight:600">~5–8%</td></tr>
+        <tr><td>ArtFire (Free)</td><td style="color:#fbbf24; font-weight:600">3.5%</td></tr>
+        <tr><td style="color:#34d399; font-weight:700">SwapCraft</td><td class="green">5% (+ swap features)</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 8: TEAM & STAKEHOLDERS ===== -->
+<div class="slide slide-accent">
+  <div class="slide-num">08 / 10</div>
+  <h2>Team &amp; Stakeholders</h2>
+  <div class="card-grid card-grid-2">
+    <div>
+      <div class="card yellow-border" style="margin-bottom:16px">
+        <h3>👥 Core Team</h3>
+        <table style="font-size:14px; margin-top:8px">
+          <tr><td class="highlight">Project Sponsor</td><td>Executive Leadership</td></tr>
+          <tr><td class="highlight">Project Manager</td><td>Planning, execution, risk, comms</td></tr>
+          <tr><td class="highlight">Business Analyst</td><td>Requirements, documentation</td></tr>
+          <tr><td class="highlight">Lead Architect</td><td>System design, tech stack</td></tr>
+          <tr><td class="highlight">Frontend Dev ×2</td><td>Responsive web UI</td></tr>
+          <tr><td class="highlight">Backend Dev ×2</td><td>APIs, DB, integrations</td></tr>
+          <tr><td class="highlight">UI/UX Designer</td><td>Wireframes, design system</td></tr>
+          <tr><td class="highlight">QA Engineer</td><td>Test cases, bug tracking</td></tr>
+          <tr><td class="highlight">DevOps Engineer</td><td>CI/CD, cloud infra, monitoring</td></tr>
+          <tr><td class="highlight">Community Manager</td><td>Forums, beta users, feedback</td></tr>
+        </table>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <h3>🗺️ Stakeholder Map</h3>
+        <table style="font-size:14px; margin-top:8px">
+          <thead><tr><th>Stakeholder</th><th>Influence</th><th>Engagement</th></tr></thead>
+          <tr><td>Executive Sponsor</td><td class="red">High</td><td>Manage Closely</td></tr>
+          <tr><td>Project Manager</td><td class="red">High</td><td>Manage Closely</td></tr>
+          <tr><td>Dev Team</td><td class="red">High</td><td>Manage Closely</td></tr>
+          <tr><td>Independent Artisans</td><td style="color:#fbbf24;font-weight:600">Medium</td><td>Keep Informed</td></tr>
+          <tr><td>Buyers / End Users</td><td style="color:#34d399;font-weight:600">Low</td><td>Keep Informed</td></tr>
+          <tr><td>Payment Gateway</td><td style="color:#fbbf24;font-weight:600">Medium</td><td>Keep Satisfied</td></tr>
+          <tr><td>Legal / Compliance</td><td style="color:#fbbf24;font-weight:600">Medium</td><td>Keep Satisfied</td></tr>
+          <tr><td>Professor / Evaluator</td><td class="red">High</td><td>Manage Closely</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 9: RISK OVERVIEW ===== -->
+<div class="slide slide-red">
+  <div class="slide-num">09 / 10</div>
+  <h2>Risk Overview</h2>
+  <table style="font-size:14px">
+    <thead>
+      <tr><th>ID</th><th>Risk</th><th>Likelihood</th><th>Impact</th><th>Mitigation Strategy</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="highlight">R-01</td><td>Key developer unavailability</td>
+        <td><span class="risk-pill risk-medium">Medium</span></td>
+        <td><span class="risk-pill risk-high">High</span></td>
+        <td>Cross-train team; maintain talent pipeline</td>
+      </tr>
+      <tr>
+        <td class="highlight">R-02</td><td>Budget overrun</td>
+        <td><span class="risk-pill risk-medium">Medium</span></td>
+        <td><span class="risk-pill risk-high">High</span></td>
+        <td>Weekly budget tracking; 10% contingency reserve</td>
+      </tr>
+      <tr>
+        <td class="highlight">R-03</td><td>Scope creep</td>
+        <td><span class="risk-pill risk-high">High</span></td>
+        <td><span class="risk-pill risk-medium">Medium</span></td>
+        <td>Strict change control; locked scope baseline</td>
+      </tr>
+      <tr>
+        <td class="highlight">R-04</td><td>Payment gateway integration failure</td>
+        <td><span class="risk-pill risk-low">Low</span></td>
+        <td><span class="risk-pill risk-high">High</span></td>
+        <td>Evaluate 2 providers; build fallback option</td>
+      </tr>
+      <tr>
+        <td class="highlight">R-05</td><td>Low user adoption at launch</td>
+        <td><span class="risk-pill risk-medium">Medium</span></td>
+        <td><span class="risk-pill risk-high">High</span></td>
+        <td>Beta program; influencer partnerships; referral system</td>
+      </tr>
+      <tr>
+        <td class="highlight">R-06</td><td>Security breach / data leak</td>
+        <td><span class="risk-pill risk-low">Low</span></td>
+        <td><span class="risk-pill risk-high">High</span></td>
+        <td>Penetration testing; encryption; GDPR compliance</td>
+      </tr>
+      <tr>
+        <td class="highlight">R-07</td><td>Technical debt / poor performance</td>
+        <td><span class="risk-pill risk-medium">Medium</span></td>
+        <td><span class="risk-pill risk-medium">Medium</span></td>
+        <td>Code reviews; performance benchmarks in QA phase</td>
+      </tr>
+      <tr>
+        <td class="highlight">R-08</td><td>Regulatory / legal non-compliance</td>
+        <td><span class="risk-pill risk-low">Low</span></td>
+        <td><span class="risk-pill risk-high">High</span></td>
+        <td>Engage legal advisor early; regular compliance audits</td>
+      </tr>
+      <tr>
+        <td class="highlight">R-09</td><td>Exchange system abuse / fraud</td>
+        <td><span class="risk-pill risk-medium">Medium</span></td>
+        <td><span class="risk-pill risk-medium">Medium</span></td>
+        <td>User verification; escrow-based exchange; dispute resolution</td>
+      </tr>
+      <tr>
+        <td class="highlight">R-10</td><td>Failure to reach break-even by Year 2</td>
+        <td><span class="risk-pill risk-medium">Medium</span></td>
+        <td><span class="risk-pill risk-high">High</span></td>
+        <td>Monitor LTV/CAC monthly; adjust pricing &amp; marketing</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ===== SLIDE 10: SUMMARY & RECOMMENDATION ===== -->
+<div class="slide slide-end">
+  <div class="slide-num">10 / 10</div>
+  <h2>Summary &amp; Recommendation</h2>
+  <div class="card-grid card-grid-2" style="margin-bottom:20px">
+    <div class="card green-border">
+      <h3>✅ Why Approve SwapCraft?</h3>
+      <ul class="bullets green">
+        <li>Addresses a clear, validated market gap in the $15B online craft space</li>
+        <li>Unique exchange/swap feature — no competitor offers this</li>
+        <li>Multiple sustainable revenue streams (fees + subscriptions + ads)</li>
+        <li>Strong social impact: empowers micro-entrepreneurs &amp; artisans</li>
+        <li>Realistic path to break-even by end of Year 2</li>
+        <li>Scalable architecture ready for Phase 2 (mobile, AI, multi-language)</li>
+      </ul>
+    </div>
+    <div class="card yellow-border">
+      <h3>📋 Key Facts at a Glance</h3>
+      <table style="font-size:15px; margin-top:8px">
+        <tr><td>Project ID</td><td class="highlight">SC-2026-001 v1.1</td></tr>
+        <tr><td>Timeline</td><td class="highlight">Sep 1, 2026 → Jun 1, 2027</td></tr>
+        <tr><td>Total Budget</td><td class="highlight">$329,200</td></tr>
+        <tr><td>Year 1 Revenue</td><td class="green">$220K – $420K</td></tr>
+        <tr><td>Break-even</td><td class="green">End of Year 2</td></tr>
+        <tr><td>Team Size</td><td class="highlight">6 core + support roles</td></tr>
+        <tr><td>Commission Rate</td><td class="green">5% (vs 10–15% competitors)</td></tr>
+        <tr><td>Target Users Y1</td><td class="highlight">5K sellers + 20K buyers</td></tr>
+      </table>
+    </div>
+  </div>
+  <div style="text-align:center; padding:24px; background:rgba(167,139,250,0.08); border-radius:16px; border:1px solid rgba(167,139,250,0.3)">
+    <p style="font-size:22px; color:#a78bfa; font-weight:700;">
+      🚀 Recommendation: <span style="color:#f59e0b">Approve &amp; Proceed</span>
+    </p>
+    <p style="font-size:15px; color:#94a3b8; margin-top:10px;">
+      The opportunity is timely, the need is validated, and the potential for long-term community impact<br>
+      and financial return is significant. Delay risks ceding this market space to a competitor.
+    </p>
+    <div class="badge-row" style="justify-content:center; margin-top:18px">
+      <span class="badge green">EPITA PM Group</span>
+      <span class="badge yellow">Spring 2026</span>
+      <span class="badge">Prepared for: President Rosemary</span>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
