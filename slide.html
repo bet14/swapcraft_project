@@ -1257,128 +1257,477 @@
       </div>
     </section>
 
-    <!-- Slide 09: Team & Risks -->
-    <section class="slide">
-      <div class="content">
-        <div class="slide-header">
-          <div>
-            <div class="eyebrow">Team Roles, Stakeholders & Risks</div>
-            <h1>Clear ownership with manageable risks</h1>
-          </div>
-          <div class="slide-no">09</div>
-        </div>
+   <!-- Slide 09: Team Roles & Stakeholders -->
+<section class="slide">
+  <div class="content">
+    <div class="slide-header">
+      <div>
+        <div class="eyebrow">Team Roles & Stakeholders</div>
+        <h1>RACI-driven governance with clear ownership</h1>
+      </div>
+      <div class="slide-no">09</div>
+    </div>
 
-        <div class="grid-2">
-          <div class="card">
-            <h2>RACI-Driven Governance</h2>
-            <div class="role-grid">
-              <div class="role-item">
-                <div class="role-badge">🎯</div>
-                <div>
-                  <div class="role-title">Executive Sponsor</div>
-                  <div class="role-desc">Funding, strategic direction, major approvals, launch decision.</div>
-                </div>
+    <div class="grid-2">
+      <!-- Left: Core RACI Ownership -->
+      <div class="card">
+        <h2>Core Project Roles</h2>
+
+        <div class="role-grid">
+          <div class="role-item">
+            <div class="role-badge">🎯</div>
+            <div>
+              <div class="role-title">Project Sponsor</div>
+              <div class="role-desc">
+                Accountable for funding, strategic direction, final approval, launch decision, and business case sign-off.
               </div>
-
-              <div class="role-item">
-                <div class="role-badge">🧭</div>
-                <div>
-                  <div class="role-title">Project Manager</div>
-                  <div class="role-desc">Schedule, budget, risks, stakeholder communication.</div>
-                </div>
-              </div>
-
-              <div class="role-item">
-                <div class="role-badge">📋</div>
-                <div>
-                  <div class="role-title">Business Analyst</div>
-                  <div class="role-desc">Requirements and documentation.</div>
-                </div>
-              </div>
-
-              <div class="role-item">
-                <div class="role-badge">🏗️</div>
-                <div>
-                  <div class="role-title">Lead Architect</div>
-                  <div class="role-desc">Architecture, standards, ERD, API contracts.</div>
-                </div>
-              </div>
-
-              <div class="role-item">
-                <div class="role-badge">💻</div>
-                <div>
-                  <div class="role-title">Developers / QA</div>
-                  <div class="role-desc">Frontend, backend, testing, quality gates.</div>
-                </div>
-              </div>
-
-              <div class="role-item">
-                <div class="role-badge">☁️</div>
-                <div>
-                  <div class="role-title">DevOps / Security</div>
-                  <div class="role-desc">CI/CD, deployment, monitoring, security readiness.</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="meta-row">
-              <span class="tag red">Sponsor — Manage Closely</span>
-              <span class="tag red">Dev Team — Manage Closely</span>
-              <span class="tag green">Artisans — Keep Informed</span>
-              <span class="tag orange">Legal / Payment — Keep Satisfied</span>
             </div>
           </div>
 
-          <div class="card">
-            <h2>Top Risks & Mitigation</h2>
-            <div class="grid-2">
-              <div class="risk-card">
-                <div class="icon red">📉</div>
-                <div>
-                  <div class="risk-title">Low Adoption</div>
-                  <div class="risk-text">Pre-registration, beta campaign, founding artisans, referrals.</div>
-                </div>
-              </div>
-
-              <div class="risk-card">
-                <div class="icon orange">🧩</div>
-                <div>
-                  <div class="risk-title">Scope Creep</div>
-                  <div class="risk-text">Lock MVP scope and require formal change approval.</div>
-                </div>
-              </div>
-
-              <div class="risk-card">
-                <div class="icon cyan">🔐</div>
-                <div>
-                  <div class="risk-title">Security Breach</div>
-                  <div class="risk-text">PCI-DSS gateway, encryption, penetration testing, RBAC.</div>
-                </div>
-              </div>
-
-              <div class="risk-card">
-                <div class="icon purple">⚖️</div>
-                <div>
-                  <div class="risk-title">Compliance</div>
-                  <div class="risk-text">Legal review, privacy notices, ToS, takedown process.</div>
-                </div>
+          <div class="role-item">
+            <div class="role-badge">🧭</div>
+            <div>
+              <div class="role-title">Project Manager</div>
+              <div class="role-desc">
+                Accountable for delivery coordination, schedule, risks, budget, stakeholder communication, and milestones.
               </div>
             </div>
+          </div>
 
-            <div class="quote" style="margin-top:18px;">
-              Main risk priority: build marketplace liquidity early while controlling MVP scope, fraud, compliance, and acquisition cost.
+          <div class="role-item">
+            <div class="role-badge">📋</div>
+            <div>
+              <div class="role-title">Business Analyst</div>
+              <div class="role-desc">
+                Responsible for requirements gathering, BRD/SRS documentation, UAT coordination, and KPI reporting.
+              </div>
+            </div>
+          </div>
+
+          <div class="role-item">
+            <div class="role-badge">🏗️</div>
+            <div>
+              <div class="role-title">Lead Architect</div>
+              <div class="role-desc">
+                Responsible for system architecture, database design, technical stack, API structure, and standards.
+              </div>
+            </div>
+          </div>
+
+          <div class="role-item">
+            <div class="role-badge">💻</div>
+            <div>
+              <div class="role-title">Development Team</div>
+              <div class="role-desc">
+                Frontend and backend developers build UI, APIs, authentication, payments, swap logic, and admin features.
+              </div>
+            </div>
+          </div>
+
+          <div class="role-item">
+            <div class="role-badge">🎨</div>
+            <div>
+              <div class="role-title">UI/UX Designer</div>
+              <div class="role-desc">
+                Responsible for wireframes, high-fidelity mockups, clickable prototype, and complete design system.
+              </div>
+            </div>
+          </div>
+
+          <div class="role-item">
+            <div class="role-badge">🧪</div>
+            <div>
+              <div class="role-title">QA Engineer</div>
+              <div class="role-desc">
+                Responsible for test planning, execution, bug management, QA reporting, and UAT support.
+              </div>
+            </div>
+          </div>
+
+          <div class="role-item">
+            <div class="role-badge">☁️</div>
+            <div>
+              <div class="role-title">DevOps Engineer</div>
+              <div class="role-desc">
+                Responsible for cloud infrastructure, CI/CD, production deployment, monitoring, uptime, and incident response.
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="footer">
-        <span>Governance + Risk Register Summary</span>
-        <span>Adoption, Scope, Security, Compliance, Finance</span>
-      </div>
-    </section>
+      <!-- Right: Stakeholders + Governance -->
+      <div class="card">
+        <h2>Stakeholder Engagement Model</h2>
 
-    <!-- Slide 10: Summary & Recommendation -->
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Stakeholder</th>
+              <th>Priority</th>
+              <th>Engagement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Project Sponsor</strong></td>
+              <td>High</td>
+              <td><span class="tag red">Manage Closely</span></td>
+            </tr>
+            <tr>
+              <td><strong>Project Manager</strong></td>
+              <td>High</td>
+              <td><span class="tag red">Manage Closely</span></td>
+            </tr>
+            <tr>
+              <td><strong>Development Team</strong></td>
+              <td>High</td>
+              <td><span class="tag red">Manage Closely</span></td>
+            </tr>
+            <tr>
+              <td><strong>Professor / Evaluator</strong></td>
+              <td>High</td>
+              <td><span class="tag red">Manage Closely</span></td>
+            </tr>
+            <tr>
+              <td><strong>Artisans / Sellers</strong></td>
+              <td>High</td>
+              <td><span class="tag green">Consult + Inform</span></td>
+            </tr>
+            <tr>
+              <td><strong>Buyers / End Users</strong></td>
+              <td>High</td>
+              <td><span class="tag green">Consult + Inform</span></td>
+            </tr>
+            <tr>
+              <td><strong>Legal Advisor</strong></td>
+              <td>Medium</td>
+              <td><span class="tag orange">Keep Satisfied</span></td>
+            </tr>
+            <tr>
+              <td><strong>Payment / Cloud Providers</strong></td>
+              <td>Medium</td>
+              <td><span class="tag orange">Keep Satisfied</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="quote" style="margin-top:18px;">
+          Single accountability principle: Sponsor owns funding and final approval; PM owns delivery; Architect owns technical design; QA owns quality; DevOps owns deployment; Marketing, Support, and Community own post-launch user growth and operations.
+        </div>
+      </div>
+    </div>
+
+    <div class="grid-4" style="margin-top:22px;">
+      <div class="card compact">
+        <h3>📌 Funding & Approval</h3>
+        <p>Sponsor is accountable for project approval, budget authorization, and launch go/no-go.</p>
+      </div>
+
+      <div class="card compact">
+        <h3>🧩 Delivery Control</h3>
+        <p>PM is accountable for project execution, milestone completion, risk tracking, and communication.</p>
+      </div>
+
+      <div class="card compact">
+        <h3>🔐 Compliance Readiness</h3>
+        <p>Legal Advisor supports GDPR, privacy policy, terms of service, and e-commerce compliance.</p>
+      </div>
+
+      <div class="card compact">
+        <h3>🌱 User Growth</h3>
+        <p>Marketing and Community Manager drive pre-launch campaigns, artisan onboarding, and engagement.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>RACI Matrix · SC-2026-001</span>
+    <span>Clear ownership across delivery, compliance, launch, and operations</span>
+  </div>
+</section>
+<!-- Slide 09: Team Roles & Stakeholders -->
+<section class="slide">
+  <div class="content">
+    <div class="slide-header" style="margin-bottom:20px;">
+      <div>
+        <div class="eyebrow">Team Roles & Stakeholders</div>
+        <h1 style="font-size:44px;">RACI-driven governance with clear ownership</h1>
+      </div>
+      <div class="slide-no">09</div>
+    </div>
+
+    <div class="grid-2" style="gap:18px;">
+      <!-- Left: Core Roles -->
+      <div class="card" style="padding:18px;">
+        <h2 style="margin-bottom:12px;">Core Delivery Ownership</h2>
+
+        <div class="role-grid" style="gap:10px;">
+          <div class="role-item" style="padding:11px;">
+            <div class="role-badge">🎯</div>
+            <div>
+              <div class="role-title">Project Sponsor</div>
+              <div class="role-desc">
+                Accountable for funding, strategy, final approval, launch decision, and business case sign-off.
+              </div>
+            </div>
+          </div>
+
+          <div class="role-item" style="padding:11px;">
+            <div class="role-badge">🧭</div>
+            <div>
+              <div class="role-title">Project Manager</div>
+              <div class="role-desc">
+                Accountable for delivery, schedule, budget, risks, milestones, and stakeholder communication.
+              </div>
+            </div>
+          </div>
+
+          <div class="role-item" style="padding:11px;">
+            <div class="role-badge">📋</div>
+            <div>
+              <div class="role-title">Business Analyst</div>
+              <div class="role-desc">
+                Responsible for requirements, BRD/SRS, documentation, UAT support, and KPI reporting.
+              </div>
+            </div>
+          </div>
+
+          <div class="role-item" style="padding:11px;">
+            <div class="role-badge">🏗️</div>
+            <div>
+              <div class="role-title">Lead Architect</div>
+              <div class="role-desc">
+                Responsible for architecture, database design, API structure, technical standards, and scalability.
+              </div>
+            </div>
+          </div>
+
+          <div class="role-item" style="padding:11px;">
+            <div class="role-badge">💻</div>
+            <div>
+              <div class="role-title">Development Team</div>
+              <div class="role-desc">
+                Builds frontend, backend, APIs, authentication, payment integration, swap logic, and admin tools.
+              </div>
+            </div>
+          </div>
+
+          <div class="role-item" style="padding:11px;">
+            <div class="role-badge">🧪</div>
+            <div>
+              <div class="role-title">QA & DevOps</div>
+              <div class="role-desc">
+                QA owns testing and UAT; DevOps owns CI/CD, cloud setup, deployment, monitoring, and uptime.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Stakeholders -->
+      <div class="card" style="padding:18px;">
+        <h2 style="margin-bottom:12px;">Stakeholder Engagement</h2>
+
+        <table class="table" style="font-size:12.5px;">
+          <thead>
+            <tr>
+              <th style="padding:9px 10px;">Stakeholder</th>
+              <th style="padding:9px 10px;">Priority</th>
+              <th style="padding:9px 10px;">Engagement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:9px 10px;"><strong>Project Sponsor</strong></td>
+              <td style="padding:9px 10px;">High</td>
+              <td style="padding:9px 10px;"><span class="tag red">Manage Closely</span></td>
+            </tr>
+            <tr>
+              <td style="padding:9px 10px;"><strong>Project Manager</strong></td>
+              <td style="padding:9px 10px;">High</td>
+              <td style="padding:9px 10px;"><span class="tag red">Manage Closely</span></td>
+            </tr>
+            <tr>
+              <td style="padding:9px 10px;"><strong>Development Team</strong></td>
+              <td style="padding:9px 10px;">High</td>
+              <td style="padding:9px 10px;"><span class="tag red">Manage Closely</span></td>
+            </tr>
+            <tr>
+              <td style="padding:9px 10px;"><strong>Professor / Evaluator</strong></td>
+              <td style="padding:9px 10px;">High</td>
+              <td style="padding:9px 10px;"><span class="tag red">Manage Closely</span></td>
+            </tr>
+            <tr>
+              <td style="padding:9px 10px;"><strong>Artisans / Sellers</strong></td>
+              <td style="padding:9px 10px;">High</td>
+              <td style="padding:9px 10px;"><span class="tag green">Consult + Inform</span></td>
+            </tr>
+            <tr>
+              <td style="padding:9px 10px;"><strong>Buyers / End Users</strong></td>
+              <td style="padding:9px 10px;">High</td>
+              <td style="padding:9px 10px;"><span class="tag green">Consult + Inform</span></td>
+            </tr>
+            <tr>
+              <td style="padding:9px 10px;"><strong>Legal / Payment / Cloud</strong></td>
+              <td style="padding:9px 10px;">Medium</td>
+              <td style="padding:9px 10px;"><span class="tag orange">Keep Satisfied</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="quote" style="margin-top:16px; padding:15px 17px; font-size:16px;">
+          Single accountability principle: Sponsor owns funding and final approval; PM owns delivery; Architect owns technical design; QA owns quality; DevOps owns deployment; Marketing, Support, and Community own growth and operations.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>RACI Matrix · SC-2026-001</span>
+    <span>Delivery · Compliance · Launch · Operations</span>
+  </div>
+</section>
+<!-- Slide 10: Risks & Mitigation -->
+<section class="slide">
+  <div class="content">
+    <div class="slide-header" style="margin-bottom:20px;">
+      <div>
+        <div class="eyebrow">Risks & Mitigation Overview</div>
+        <h1 style="font-size:44px;">Key risks are significant but controllable</h1>
+      </div>
+      <div class="slide-no">10</div>
+    </div>
+
+    <div class="grid-2" style="gap:18px;">
+      <!-- Left: Risk Register -->
+      <div class="card" style="padding:18px;">
+        <h2 style="margin-bottom:12px;">Top Project Risks</h2>
+
+        <table class="table" style="font-size:12.2px;">
+          <thead>
+            <tr>
+              <th style="padding:8px 9px;">Risk</th>
+              <th style="padding:8px 9px;">L / I</th>
+              <th style="padding:8px 9px;">Mitigation Strategy</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding:8px 9px;"><strong>Low initial user adoption</strong></td>
+              <td style="padding:8px 9px;">Medium / High</td>
+              <td style="padding:8px 9px;">Pre-launch campaign, 100 founding artisans, referral program.</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 9px;"><strong>Payment fraud or breach</strong></td>
+              <td style="padding:8px 9px;">Low / Very High</td>
+              <td style="padding:8px 9px;">PCI-DSS gateway, encryption, audits, penetration testing.</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 9px;"><strong>Competition from Etsy / Amazon</strong></td>
+              <td style="padding:8px 9px;">High / Medium</td>
+              <td style="padding:8px 9px;">Differentiate by exchange system, lower fees, and community focus.</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 9px;"><strong>Exchange system abuse</strong></td>
+              <td style="padding:8px 9px;">Medium / Medium</td>
+              <td style="padding:8px 9px;">Verification, escrow-style exchange, moderation, dispute process.</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 9px;"><strong>Scope creep</strong></td>
+              <td style="padding:8px 9px;">Medium / High</td>
+              <td style="padding:8px 9px;">Agile sprint goals, MVP baseline, formal change control.</td>
+            </tr>
+            <tr>
+              <td style="padding:8px 9px;"><strong>Break-even delay</strong></td>
+              <td style="padding:8px 9px;">Medium / High</td>
+              <td style="padding:8px 9px;">Monthly revenue/OPEX review, pricing adjustment, CAC control.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Right: Mitigation Priorities -->
+      <div class="card" style="padding:18px;">
+        <h2 style="margin-bottom:12px;">Mitigation Priorities</h2>
+
+        <div class="grid-2" style="gap:10px;">
+          <div class="risk-card" style="padding:12px;">
+            <div class="icon red">📉</div>
+            <div>
+              <div class="risk-title">Adoption Risk</div>
+              <div class="risk-text">
+                Build waitlist, launch beta campaign, recruit founding artisans, and activate referrals.
+              </div>
+            </div>
+          </div>
+
+          <div class="risk-card" style="padding:12px;">
+            <div class="icon cyan">🔐</div>
+            <div>
+              <div class="risk-title">Security Risk</div>
+              <div class="risk-text">
+                Use PCI-DSS payments, SSL, RBAC, monitoring, audits, and penetration testing.
+              </div>
+            </div>
+          </div>
+
+          <div class="risk-card" style="padding:12px;">
+            <div class="icon orange">🧩</div>
+            <div>
+              <div class="risk-title">Scope Risk</div>
+              <div class="risk-text">
+                Freeze MVP baseline and require sponsor approval for material scope changes.
+              </div>
+            </div>
+          </div>
+
+          <div class="risk-card" style="padding:12px;">
+            <div class="icon purple">⚖️</div>
+            <div>
+              <div class="risk-title">Legal Risk</div>
+              <div class="risk-text">
+                Prepare GDPR, tax, privacy policy, terms of service, and e-commerce compliance early.
+              </div>
+            </div>
+          </div>
+
+          <div class="risk-card" style="padding:12px;">
+            <div class="icon green">🛡️</div>
+            <div>
+              <div class="risk-title">Exchange Abuse</div>
+              <div class="risk-text">
+                Add verification, exchange rules, moderation, and dispute-resolution workflow.
+              </div>
+            </div>
+          </div>
+
+          <div class="risk-card" style="padding:12px;">
+            <div class="icon red">💸</div>
+            <div>
+              <div class="risk-title">Financial Risk</div>
+              <div class="risk-text">
+                Track revenue, OPEX, CAC, take rate, and LTV/CAC monthly to protect Year 2 break-even.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quote" style="margin-top:16px; padding:15px 17px; font-size:16px;">
+          Risk approach: build liquidity before launch, protect MVP scope, secure payment and data flows, prepare compliance early, and monitor financial performance after launch.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Risk Register Summary · Business Case v1.1</span>
+    <span>Adoption · Security · Scope · Competition · Compliance · Finance</span>
+  </div>
+</section>
+
+
+    <!-- Slide 11: Summary & Recommendation -->
     <section class="slide">
       <div class="content">
         <div class="slide-header">
@@ -1386,7 +1735,7 @@
             <div class="eyebrow">Summary & Recommendation</div>
             <h1>Approve Option C: full-featured SwapCraft platform</h1>
           </div>
-          <div class="slide-no">10</div>
+          <div class="slide-no">11</div>
         </div>
 
         <div class="grid-2">
