@@ -28,11 +28,17 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+      scroll-snap-type: y mandatory;
+    }
+
     body {
       margin: 0;
       background: #020617;
       color: var(--text);
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      overflow-y: hidden;
     }
 
     .deck {
@@ -58,6 +64,7 @@
         linear-gradient(135deg, #070a13 0%, #0c1020 48%, #111827 100%);
       box-shadow: 0 28px 80px rgba(0, 0, 0, 0.58);
       page-break-after: always;
+      scroll-snap-align: start;
     }
 
     .slide::before {
@@ -619,9 +626,52 @@
       font-weight: 800;
     }
 
+    .nav-buttons {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      display: grid;
+      grid-template-columns: repeat(2, 56px);
+      gap: 10px;
+      z-index: 9999;
+    }
+
+    .nav-buttons button {
+      width: 56px;
+      height: 56px;
+      border: none;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.14);
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: 0.2s ease;
+    }
+
+    .nav-buttons button:hover {
+      background: rgba(255,255,255,0.24);
+      transform: translateY(-1px);
+    }
+
+    .slide-indicator {
+      position: fixed;
+      left: 20px;
+      bottom: 20px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      color: white;
+      font-size: 13px;
+      font-weight: 800;
+      z-index: 9999;
+      backdrop-filter: blur(10px);
+    }
+
     @media print {
       body {
         background: #020617;
+        overflow: visible;
       }
 
       .deck {
@@ -635,15 +685,28 @@
         border-radius: 0;
         box-shadow: none;
       }
+
+      .nav-buttons,
+      .slide-indicator {
+        display: none;
+      }
     }
   </style>
 </head>
 
 <body>
+  <div class="slide-indicator" id="slideIndicator">Slide 1 / 11</div>
+
+  <div class="nav-buttons">
+    <button onclick="goToSlide(currentIndex - 1)" title="Previous">↑</button>
+    <button onclick="goToSlide(currentIndex + 1)" title="Next">↓</button>
+    <button onclick="goToSlide(currentIndex - 1)" title="Previous">←</button>
+    <button onclick="goToSlide(currentIndex + 1)" title="Next">→</button>
+  </div>
+
   <main class="deck">
 
-    <!-- Slide 01: Title -->
-    <section class="slide title">
+    <section class="slide title" id="slide-1">
       <div class="content">
         <div class="eyebrow">Project Proposal · SC-2026-001</div>
         <h1>SwapCraft</h1>
@@ -701,8 +764,7 @@
       </div>
     </section>
 
-    <!-- Slide 02: Content / Agenda -->
-    <section class="slide">
+    <section class="slide" id="slide-2">
       <div class="content">
         <div class="slide-header">
           <div>
@@ -785,8 +847,7 @@
       </div>
     </section>
 
-    <!-- Slide 03: Main Proposal -->
-    <section class="slide">
+    <section class="slide" id="slide-3">
       <div class="content">
         <div class="slide-header">
           <div>
@@ -855,8 +916,7 @@
       </div>
     </section>
 
-    <!-- Slide 04: Problem & Market Opportunity -->
-    <section class="slide">
+    <section class="slide" id="slide-4">
       <div class="content">
         <div class="slide-header">
           <div>
@@ -935,8 +995,7 @@
       </div>
     </section>
 
-    <!-- Slide 05: Objectives -->
-    <section class="slide">
+    <section class="slide" id="slide-5">
       <div class="content">
         <div class="slide-header">
           <div>
@@ -1001,8 +1060,7 @@
       </div>
     </section>
 
-    <!-- Slide 06: Scope -->
-    <section class="slide">
+    <section class="slide" id="slide-6">
       <div class="content">
         <div class="slide-header">
           <div>
@@ -1061,8 +1119,7 @@
       </div>
     </section>
 
-    <!-- Slide 07: Deliverables & Timeline -->
-    <section class="slide">
+    <section class="slide" id="slide-7">
       <div class="content">
         <div class="slide-header">
           <div>
@@ -1148,8 +1205,7 @@
       </div>
     </section>
 
-    <!-- Slide 08: Budget & Benefits -->
-    <section class="slide">
+    <section class="slide" id="slide-8">
       <div class="content">
         <div class="slide-header">
           <div>
@@ -1257,290 +1313,282 @@
       </div>
     </section>
 
+    <section class="slide" id="slide-9">
+      <div class="content">
+        <div class="slide-header" style="margin-bottom:20px;">
+          <div>
+            <div class="eyebrow">Team Roles & Stakeholders</div>
+            <h1 style="font-size:44px;">RACI-driven governance with clear ownership</h1>
+          </div>
+          <div class="slide-no">09</div>
+        </div>
 
-<!-- Slide 09: Team Roles & Stakeholders -->
-<section class="slide">
-  <div class="content">
-    <div class="slide-header" style="margin-bottom:20px;">
-      <div>
-        <div class="eyebrow">Team Roles & Stakeholders</div>
-        <h1 style="font-size:44px;">RACI-driven governance with clear ownership</h1>
-      </div>
-      <div class="slide-no">09</div>
-    </div>
+        <div class="grid-2" style="gap:18px;">
+          <div class="card" style="padding:18px;">
+            <h2 style="margin-bottom:12px;">Core Delivery Ownership</h2>
 
-    <div class="grid-2" style="gap:18px;">
-      <!-- Left: Core Roles -->
-      <div class="card" style="padding:18px;">
-        <h2 style="margin-bottom:12px;">Core Delivery Ownership</h2>
+            <div class="role-grid" style="gap:10px;">
+              <div class="role-item" style="padding:11px;">
+                <div class="role-badge">🎯</div>
+                <div>
+                  <div class="role-title">Project Sponsor</div>
+                  <div class="role-desc">
+                    Accountable for funding, strategy, final approval, launch decision, and business case sign-off.
+                  </div>
+                </div>
+              </div>
 
-        <div class="role-grid" style="gap:10px;">
-          <div class="role-item" style="padding:11px;">
-            <div class="role-badge">🎯</div>
-            <div>
-              <div class="role-title">Project Sponsor</div>
-              <div class="role-desc">
-                Accountable for funding, strategy, final approval, launch decision, and business case sign-off.
+              <div class="role-item" style="padding:11px;">
+                <div class="role-badge">🧭</div>
+                <div>
+                  <div class="role-title">Project Manager</div>
+                  <div class="role-desc">
+                    Accountable for delivery, schedule, budget, risks, milestones, and stakeholder communication.
+                  </div>
+                </div>
+              </div>
+
+              <div class="role-item" style="padding:11px;">
+                <div class="role-badge">📋</div>
+                <div>
+                  <div class="role-title">Business Analyst</div>
+                  <div class="role-desc">
+                    Responsible for requirements, BRD/SRS, documentation, UAT support, and KPI reporting.
+                  </div>
+                </div>
+              </div>
+
+              <div class="role-item" style="padding:11px;">
+                <div class="role-badge">🏗️</div>
+                <div>
+                  <div class="role-title">Lead Architect</div>
+                  <div class="role-desc">
+                    Responsible for architecture, database design, API structure, technical standards, and scalability.
+                  </div>
+                </div>
+              </div>
+
+              <div class="role-item" style="padding:11px;">
+                <div class="role-badge">💻</div>
+                <div>
+                  <div class="role-title">Development Team</div>
+                  <div class="role-desc">
+                    Builds frontend, backend, APIs, authentication, payment integration, swap logic, and admin tools.
+                  </div>
+                </div>
+              </div>
+
+              <div class="role-item" style="padding:11px;">
+                <div class="role-badge">🧪</div>
+                <div>
+                  <div class="role-title">QA & DevOps</div>
+                  <div class="role-desc">
+                    QA owns testing and UAT; DevOps owns CI/CD, cloud setup, deployment, monitoring, and uptime.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="role-item" style="padding:11px;">
-            <div class="role-badge">🧭</div>
-            <div>
-              <div class="role-title">Project Manager</div>
-              <div class="role-desc">
-                Accountable for delivery, schedule, budget, risks, milestones, and stakeholder communication.
-              </div>
-            </div>
-          </div>
+          <div class="card" style="padding:18px;">
+            <h2 style="margin-bottom:12px;">Stakeholder Engagement</h2>
 
-          <div class="role-item" style="padding:11px;">
-            <div class="role-badge">📋</div>
-            <div>
-              <div class="role-title">Business Analyst</div>
-              <div class="role-desc">
-                Responsible for requirements, BRD/SRS, documentation, UAT support, and KPI reporting.
-              </div>
-            </div>
-          </div>
+            <table class="table" style="font-size:12.5px;">
+              <thead>
+                <tr>
+                  <th style="padding:9px 10px;">Stakeholder</th>
+                  <th style="padding:9px 10px;">Priority</th>
+                  <th style="padding:9px 10px;">Engagement</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding:9px 10px;"><strong>Project Sponsor</strong></td>
+                  <td style="padding:9px 10px;">High</td>
+                  <td style="padding:9px 10px;"><span class="tag red">Manage Closely</span></td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 10px;"><strong>Project Manager</strong></td>
+                  <td style="padding:9px 10px;">High</td>
+                  <td style="padding:9px 10px;"><span class="tag red">Manage Closely</span></td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 10px;"><strong>Development Team</strong></td>
+                  <td style="padding:9px 10px;">High</td>
+                  <td style="padding:9px 10px;"><span class="tag red">Manage Closely</span></td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 10px;"><strong>Professor / Evaluator</strong></td>
+                  <td style="padding:9px 10px;">High</td>
+                  <td style="padding:9px 10px;"><span class="tag red">Manage Closely</span></td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 10px;"><strong>Artisans / Sellers</strong></td>
+                  <td style="padding:9px 10px;">High</td>
+                  <td style="padding:9px 10px;"><span class="tag green">Consult + Inform</span></td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 10px;"><strong>Buyers / End Users</strong></td>
+                  <td style="padding:9px 10px;">High</td>
+                  <td style="padding:9px 10px;"><span class="tag green">Consult + Inform</span></td>
+                </tr>
+                <tr>
+                  <td style="padding:9px 10px;"><strong>Legal / Payment / Cloud</strong></td>
+                  <td style="padding:9px 10px;">Medium</td>
+                  <td style="padding:9px 10px;"><span class="tag orange">Keep Satisfied</span></td>
+                </tr>
+              </tbody>
+            </table>
 
-          <div class="role-item" style="padding:11px;">
-            <div class="role-badge">🏗️</div>
-            <div>
-              <div class="role-title">Lead Architect</div>
-              <div class="role-desc">
-                Responsible for architecture, database design, API structure, technical standards, and scalability.
-              </div>
-            </div>
-          </div>
-
-          <div class="role-item" style="padding:11px;">
-            <div class="role-badge">💻</div>
-            <div>
-              <div class="role-title">Development Team</div>
-              <div class="role-desc">
-                Builds frontend, backend, APIs, authentication, payment integration, swap logic, and admin tools.
-              </div>
-            </div>
-          </div>
-
-          <div class="role-item" style="padding:11px;">
-            <div class="role-badge">🧪</div>
-            <div>
-              <div class="role-title">QA & DevOps</div>
-              <div class="role-desc">
-                QA owns testing and UAT; DevOps owns CI/CD, cloud setup, deployment, monitoring, and uptime.
-              </div>
+            <div class="quote" style="margin-top:16px; padding:15px 17px; font-size:16px;">
+              Single accountability principle: Sponsor owns funding and final approval; PM owns delivery; Architect owns technical design; QA owns quality; DevOps owns deployment; Marketing, Support, and Community own growth and operations.
             </div>
           </div>
         </div>
       </div>
 
-      <!-- Right: Stakeholders -->
-      <div class="card" style="padding:18px;">
-        <h2 style="margin-bottom:12px;">Stakeholder Engagement</h2>
+      <div class="footer">
+        <span>RACI Matrix · SC-2026-001</span>
+        <span>Delivery · Compliance · Launch · Operations</span>
+      </div>
+    </section>
 
-        <table class="table" style="font-size:12.5px;">
-          <thead>
-            <tr>
-              <th style="padding:9px 10px;">Stakeholder</th>
-              <th style="padding:9px 10px;">Priority</th>
-              <th style="padding:9px 10px;">Engagement</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="padding:9px 10px;"><strong>Project Sponsor</strong></td>
-              <td style="padding:9px 10px;">High</td>
-              <td style="padding:9px 10px;"><span class="tag red">Manage Closely</span></td>
-            </tr>
-            <tr>
-              <td style="padding:9px 10px;"><strong>Project Manager</strong></td>
-              <td style="padding:9px 10px;">High</td>
-              <td style="padding:9px 10px;"><span class="tag red">Manage Closely</span></td>
-            </tr>
-            <tr>
-              <td style="padding:9px 10px;"><strong>Development Team</strong></td>
-              <td style="padding:9px 10px;">High</td>
-              <td style="padding:9px 10px;"><span class="tag red">Manage Closely</span></td>
-            </tr>
-            <tr>
-              <td style="padding:9px 10px;"><strong>Professor / Evaluator</strong></td>
-              <td style="padding:9px 10px;">High</td>
-              <td style="padding:9px 10px;"><span class="tag red">Manage Closely</span></td>
-            </tr>
-            <tr>
-              <td style="padding:9px 10px;"><strong>Artisans / Sellers</strong></td>
-              <td style="padding:9px 10px;">High</td>
-              <td style="padding:9px 10px;"><span class="tag green">Consult + Inform</span></td>
-            </tr>
-            <tr>
-              <td style="padding:9px 10px;"><strong>Buyers / End Users</strong></td>
-              <td style="padding:9px 10px;">High</td>
-              <td style="padding:9px 10px;"><span class="tag green">Consult + Inform</span></td>
-            </tr>
-            <tr>
-              <td style="padding:9px 10px;"><strong>Legal / Payment / Cloud</strong></td>
-              <td style="padding:9px 10px;">Medium</td>
-              <td style="padding:9px 10px;"><span class="tag orange">Keep Satisfied</span></td>
-            </tr>
-          </tbody>
-        </table>
-
-        <div class="quote" style="margin-top:16px; padding:15px 17px; font-size:16px;">
-          Single accountability principle: Sponsor owns funding and final approval; PM owns delivery; Architect owns technical design; QA owns quality; DevOps owns deployment; Marketing, Support, and Community own growth and operations.
+    <section class="slide" id="slide-10">
+      <div class="content">
+        <div class="slide-header" style="margin-bottom:20px;">
+          <div>
+            <div class="eyebrow">Risks & Mitigation Overview</div>
+            <h1 style="font-size:44px;">Key risks are significant but controllable</h1>
+          </div>
+          <div class="slide-no">10</div>
         </div>
-      </div>
-    </div>
-  </div>
 
-  <div class="footer">
-    <span>RACI Matrix · SC-2026-001</span>
-    <span>Delivery · Compliance · Launch · Operations</span>
-  </div>
-</section>
-<!-- Slide 10: Risks & Mitigation -->
-<section class="slide">
-  <div class="content">
-    <div class="slide-header" style="margin-bottom:20px;">
-      <div>
-        <div class="eyebrow">Risks & Mitigation Overview</div>
-        <h1 style="font-size:44px;">Key risks are significant but controllable</h1>
-      </div>
-      <div class="slide-no">10</div>
-    </div>
+        <div class="grid-2" style="gap:18px;">
+          <div class="card" style="padding:18px;">
+            <h2 style="margin-bottom:12px;">Top Project Risks</h2>
 
-    <div class="grid-2" style="gap:18px;">
-      <!-- Left: Risk Register -->
-      <div class="card" style="padding:18px;">
-        <h2 style="margin-bottom:12px;">Top Project Risks</h2>
-
-        <table class="table" style="font-size:12.2px;">
-          <thead>
-            <tr>
-              <th style="padding:8px 9px;">Risk</th>
-              <th style="padding:8px 9px;">L / I</th>
-              <th style="padding:8px 9px;">Mitigation Strategy</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td style="padding:8px 9px;"><strong>Low initial user adoption</strong></td>
-              <td style="padding:8px 9px;">Medium / High</td>
-              <td style="padding:8px 9px;">Pre-launch campaign, 100 founding artisans, referral program.</td>
-            </tr>
-            <tr>
-              <td style="padding:8px 9px;"><strong>Payment fraud or breach</strong></td>
-              <td style="padding:8px 9px;">Low / Very High</td>
-              <td style="padding:8px 9px;">PCI-DSS gateway, encryption, audits, penetration testing.</td>
-            </tr>
-            <tr>
-              <td style="padding:8px 9px;"><strong>Competition from Etsy / Amazon</strong></td>
-              <td style="padding:8px 9px;">High / Medium</td>
-              <td style="padding:8px 9px;">Differentiate by exchange system, lower fees, and community focus.</td>
-            </tr>
-            <tr>
-              <td style="padding:8px 9px;"><strong>Exchange system abuse</strong></td>
-              <td style="padding:8px 9px;">Medium / Medium</td>
-              <td style="padding:8px 9px;">Verification, escrow-style exchange, moderation, dispute process.</td>
-            </tr>
-            <tr>
-              <td style="padding:8px 9px;"><strong>Scope creep</strong></td>
-              <td style="padding:8px 9px;">Medium / High</td>
-              <td style="padding:8px 9px;">Agile sprint goals, MVP baseline, formal change control.</td>
-            </tr>
-            <tr>
-              <td style="padding:8px 9px;"><strong>Break-even delay</strong></td>
-              <td style="padding:8px 9px;">Medium / High</td>
-              <td style="padding:8px 9px;">Monthly revenue/OPEX review, pricing adjustment, CAC control.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Right: Mitigation Priorities -->
-      <div class="card" style="padding:18px;">
-        <h2 style="margin-bottom:12px;">Mitigation Priorities</h2>
-
-        <div class="grid-2" style="gap:10px;">
-          <div class="risk-card" style="padding:12px;">
-            <div class="icon red">📉</div>
-            <div>
-              <div class="risk-title">Adoption Risk</div>
-              <div class="risk-text">
-                Build waitlist, launch beta campaign, recruit founding artisans, and activate referrals.
-              </div>
-            </div>
+            <table class="table" style="font-size:12.2px;">
+              <thead>
+                <tr>
+                  <th style="padding:8px 9px;">Risk</th>
+                  <th style="padding:8px 9px;">L / I</th>
+                  <th style="padding:8px 9px;">Mitigation Strategy</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style="padding:8px 9px;"><strong>Low initial user adoption</strong></td>
+                  <td style="padding:8px 9px;">Medium / High</td>
+                  <td style="padding:8px 9px;">Pre-launch campaign, 100 founding artisans, referral program.</td>
+                </tr>
+                <tr>
+                  <td style="padding:8px 9px;"><strong>Payment fraud or breach</strong></td>
+                  <td style="padding:8px 9px;">Low / Very High</td>
+                  <td style="padding:8px 9px;">PCI-DSS gateway, encryption, audits, penetration testing.</td>
+                </tr>
+                <tr>
+                  <td style="padding:8px 9px;"><strong>Competition from Etsy / Amazon</strong></td>
+                  <td style="padding:8px 9px;">High / Medium</td>
+                  <td style="padding:8px 9px;">Differentiate by exchange system, lower fees, and community focus.</td>
+                </tr>
+                <tr>
+                  <td style="padding:8px 9px;"><strong>Exchange system abuse</strong></td>
+                  <td style="padding:8px 9px;">Medium / Medium</td>
+                  <td style="padding:8px 9px;">Verification, escrow-style exchange, moderation, dispute process.</td>
+                </tr>
+                <tr>
+                  <td style="padding:8px 9px;"><strong>Scope creep</strong></td>
+                  <td style="padding:8px 9px;">Medium / High</td>
+                  <td style="padding:8px 9px;">Agile sprint goals, MVP baseline, formal change control.</td>
+                </tr>
+                <tr>
+                  <td style="padding:8px 9px;"><strong>Break-even delay</strong></td>
+                  <td style="padding:8px 9px;">Medium / High</td>
+                  <td style="padding:8px 9px;">Monthly revenue/OPEX review, pricing adjustment, CAC control.</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
-          <div class="risk-card" style="padding:12px;">
-            <div class="icon cyan">🔐</div>
-            <div>
-              <div class="risk-title">Security Risk</div>
-              <div class="risk-text">
-                Use PCI-DSS payments, SSL, RBAC, monitoring, audits, and penetration testing.
+          <div class="card" style="padding:18px;">
+            <h2 style="margin-bottom:12px;">Mitigation Priorities</h2>
+
+            <div class="grid-2" style="gap:10px;">
+              <div class="risk-card" style="padding:12px;">
+                <div class="icon red">📉</div>
+                <div>
+                  <div class="risk-title">Adoption Risk</div>
+                  <div class="risk-text">
+                    Build waitlist, launch beta campaign, recruit founding artisans, and activate referrals.
+                  </div>
+                </div>
+              </div>
+
+              <div class="risk-card" style="padding:12px;">
+                <div class="icon cyan">🔐</div>
+                <div>
+                  <div class="risk-title">Security Risk</div>
+                  <div class="risk-text">
+                    Use PCI-DSS payments, SSL, RBAC, monitoring, audits, and penetration testing.
+                  </div>
+                </div>
+              </div>
+
+              <div class="risk-card" style="padding:12px;">
+                <div class="icon orange">🧩</div>
+                <div>
+                  <div class="risk-title">Scope Risk</div>
+                  <div class="risk-text">
+                    Freeze MVP baseline and require sponsor approval for material scope changes.
+                  </div>
+                </div>
+              </div>
+
+              <div class="risk-card" style="padding:12px;">
+                <div class="icon purple">⚖️</div>
+                <div>
+                  <div class="risk-title">Legal Risk</div>
+                  <div class="risk-text">
+                    Prepare GDPR, tax, privacy policy, terms of service, and e-commerce compliance early.
+                  </div>
+                </div>
+              </div>
+
+              <div class="risk-card" style="padding:12px;">
+                <div class="icon green">🛡️</div>
+                <div>
+                  <div class="risk-title">Exchange Abuse</div>
+                  <div class="risk-text">
+                    Add verification, exchange rules, moderation, and dispute-resolution workflow.
+                  </div>
+                </div>
+              </div>
+
+              <div class="risk-card" style="padding:12px;">
+                <div class="icon red">💸</div>
+                <div>
+                  <div class="risk-title">Financial Risk</div>
+                  <div class="risk-text">
+                    Track revenue, OPEX, CAC, take rate, and LTV/CAC monthly to protect Year 2 break-even.
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="risk-card" style="padding:12px;">
-            <div class="icon orange">🧩</div>
-            <div>
-              <div class="risk-title">Scope Risk</div>
-              <div class="risk-text">
-                Freeze MVP baseline and require sponsor approval for material scope changes.
-              </div>
-            </div>
-          </div>
-
-          <div class="risk-card" style="padding:12px;">
-            <div class="icon purple">⚖️</div>
-            <div>
-              <div class="risk-title">Legal Risk</div>
-              <div class="risk-text">
-                Prepare GDPR, tax, privacy policy, terms of service, and e-commerce compliance early.
-              </div>
-            </div>
-          </div>
-
-          <div class="risk-card" style="padding:12px;">
-            <div class="icon green">🛡️</div>
-            <div>
-              <div class="risk-title">Exchange Abuse</div>
-              <div class="risk-text">
-                Add verification, exchange rules, moderation, and dispute-resolution workflow.
-              </div>
-            </div>
-          </div>
-
-          <div class="risk-card" style="padding:12px;">
-            <div class="icon red">💸</div>
-            <div>
-              <div class="risk-title">Financial Risk</div>
-              <div class="risk-text">
-                Track revenue, OPEX, CAC, take rate, and LTV/CAC monthly to protect Year 2 break-even.
-              </div>
+            <div class="quote" style="margin-top:16px; padding:15px 17px; font-size:16px;">
+              Risk approach: build liquidity before launch, protect MVP scope, secure payment and data flows, prepare compliance early, and monitor financial performance after launch.
             </div>
           </div>
         </div>
-
-        <div class="quote" style="margin-top:16px; padding:15px 17px; font-size:16px;">
-          Risk approach: build liquidity before launch, protect MVP scope, secure payment and data flows, prepare compliance early, and monitor financial performance after launch.
-        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="footer">
-    <span>Risk Register Summary · Business Case v1.1</span>
-    <span>Adoption · Security · Scope · Competition · Compliance · Finance</span>
-  </div>
-</section>
+      <div class="footer">
+        <span>Risk Register Summary · Business Case v1.1</span>
+        <span>Adoption · Security · Scope · Competition · Compliance · Finance</span>
+      </div>
+    </section>
 
-
-    <!-- Slide 11: Summary & Recommendation -->
-    <section class="slide">
+    <section class="slide" id="slide-11">
       <div class="content">
         <div class="slide-header">
           <div>
@@ -1638,5 +1686,110 @@
     </section>
 
   </main>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const slideIndicator = document.getElementById('slideIndicator');
+    let currentIndex = 0;
+    let isAnimating = false;
+    let startX = 0;
+    let startY = 0;
+    let isMouseDown = false;
+
+    function updateIndicator() {
+      slideIndicator.textContent = `Slide ${currentIndex + 1} / ${slides.length}`;
+    }
+
+    function goToSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= slides.length) index = slides.length - 1;
+      if (index === currentIndex) return;
+
+      currentIndex = index;
+      isAnimating = true;
+
+      slides[currentIndex].scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+
+      updateIndicator();
+
+      setTimeout(() => {
+        isAnimating = false;
+      }, 750);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight') {
+        e.preventDefault();
+        goToSlide(currentIndex + 1);
+      }
+
+      if (e.key === 'ArrowUp' || e.key === 'ArrowLeft') {
+        e.preventDefault();
+        goToSlide(currentIndex - 1);
+      }
+    });
+
+    let wheelLock = false;
+
+    document.addEventListener('wheel', (e) => {
+      if (wheelLock || isAnimating) return;
+
+      wheelLock = true;
+
+      if (e.deltaY > 0) {
+        goToSlide(currentIndex + 1);
+      } else if (e.deltaY < 0) {
+        goToSlide(currentIndex - 1);
+      }
+
+      setTimeout(() => {
+        wheelLock = false;
+      }, 850);
+    }, { passive: true });
+
+    document.addEventListener('mousedown', (e) => {
+      isMouseDown = true;
+      startX = e.clientX;
+      startY = e.clientY;
+    });
+
+    document.addEventListener('mouseup', (e) => {
+      if (!isMouseDown) return;
+      isMouseDown = false;
+
+      const diffX = e.clientX - startX;
+      const diffY = e.clientY - startY;
+
+      if (Math.abs(diffX) > 60 || Math.abs(diffY) > 60) {
+        if (Math.abs(diffY) > Math.abs(diffX)) {
+          if (diffY < 0) goToSlide(currentIndex + 1);
+          else goToSlide(currentIndex - 1);
+        } else {
+          if (diffX < 0) goToSlide(currentIndex + 1);
+          else goToSlide(currentIndex - 1);
+        }
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const index = slides.indexOf(entry.target);
+          if (index !== -1) {
+            currentIndex = index;
+            updateIndicator();
+          }
+        }
+      });
+    }, {
+      threshold: 0.6
+    });
+
+    slides.forEach(slide => observer.observe(slide));
+    updateIndicator();
+  </script>
 </body>
 </html>
